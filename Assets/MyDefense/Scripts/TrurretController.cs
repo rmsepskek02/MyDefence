@@ -10,8 +10,12 @@ public class TrurretController : MonoBehaviour
     public GameObject[] enemyList;
     public float rotationSpeed = 5.0f;
     public Transform partToRotate;
-    GameObject closestObject = null;
+    public GameObject bullet;
+    public Transform FirePoint;
+    public float shootDelay = 1.0f;
+    float shootTime = 0;
     float time = 0;
+    GameObject closestObject = null;
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +73,11 @@ public class TrurretController : MonoBehaviour
     void TurnObject(GameObject target)
     {
         if (target == null) return;
+        // 사거리 계산
+        if (Vector3.Distance(target.transform.position, transform.position) > gizmoRadius) return;
+
+        ShootBullet(target);
+
         // 타겟의 위치에서 현재 위치까지의 방향 벡터를 계산
         Vector3 direction = target.transform.position - partToRotate.transform.position;
         // 타겟을 바라보는 회전을 계산
@@ -78,6 +87,22 @@ public class TrurretController : MonoBehaviour
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
 
+    // 총알 발사
+    void ShootBullet (GameObject target)
+    {
+        shootTime += Time.deltaTime;
+        // shootDelay 마다 발사
+        if (shootDelay <= shootTime)
+        {
+            // 총알 생성
+            GameObject _bullet = Instantiate(bullet, FirePoint.transform.position, Quaternion.identity);
+            // 총알의 타겟 설정
+            _bullet.GetComponent<BulletController>().target = target;
+            
+            Debug.Log("SHOOT");
+            shootTime = 0;
+        }
+    }
     // 기즈모 그리기
     void OnDrawGizmos()
     {
