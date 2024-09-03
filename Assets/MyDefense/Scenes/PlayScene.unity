@@ -1464,9 +1464,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gizmoColor: {r: 0.24372911, g: 1, b: 0, a: 0.3137255}
-  gizmoRadius: 15
+  gizmoRadius: 7
   enemyList: []
   rotationSpeed: 5
+  partToRotate: {fileID: 1345590127}
 --- !u!1 &656752538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,7 +1480,7 @@ GameObject:
   - component: {fileID: 655811480}
   - component: {fileID: 654811480}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: TurretHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1497,7 +1498,7 @@ GameObject:
   - component: {fileID: 655811482}
   - component: {fileID: 654811482}
   m_Layer: 0
-  m_Name: Turret.001
+  m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2721,7 +2722,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1345590127}
   m_Layer: 0
-  m_Name: Rotate
+  m_Name: PartToRotate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
