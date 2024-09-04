@@ -20,6 +20,14 @@ namespace MyDefence
 
         //회전
         public float turnSpeed = 10f;
+
+        //슛 타이머
+        public float shootTimer = 1f;
+        private float shootCountdown = 0f;
+
+        //발사
+        public GameObject bulletPrefab;
+        public Transform firePoint;
         #endregion
 
 
@@ -50,11 +58,37 @@ namespace MyDefence
             }
 
             //타겟을 향해 총구를 회전
+            LockOn();
+
+            //터렛이 1초마다 1발씩 쏘기
+            if(shootCountdown <= 0f)
+            {
+                //타이머 명령문
+                Shoot();
+
+                //타이머 초기화
+                shootCountdown = shootTimer;
+            }
+            shootCountdown -= Time.deltaTime;
+        }
+
+        //슛 처리
+        void Shoot()
+        {
+            //Debug.Log("Shoot!!!!!!!");
+            //총구(Fire Point) 위치에 탄환 객체 생성(Instiate)하기
+            GameObject bulletGo = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            Bullet bullet = bulletGo.GetComponent<Bullet>();
+            bullet.SetTarget(target);
+        }
+
+        //타겟을 향해 총구를 회전
+        void LockOn()
+        {
             Vector3 dir = target.position - partToRotate.position;
             Quaternion lookRotation = Quaternion.LookRotation(dir);
             Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, turnSpeed * Time.deltaTime).eulerAngles;
             partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-
         }
 
         //적들중 공격할 target 적을 찾는다
