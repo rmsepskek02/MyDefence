@@ -32,6 +32,12 @@ namespace MyDefence
         // Update is called once per frame
         void Update()
         {
+            if(target == null)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
+
             //이동하기
             Vector3 dir = target.position - transform.position;
             float distanceThisFrame = Time.deltaTime * moveSpeed;

@@ -35,7 +35,6 @@ public class TrurretController : MonoBehaviour
     // Enemy 모두 찾기
     GameObject[] FindEnemy()
     {
-        Debug.Log("FIND");
         return GameObject.FindGameObjectsWithTag("Enemy");
     }
 
@@ -103,7 +102,6 @@ public class TrurretController : MonoBehaviour
             // 총알의 타겟 설정
             _bullet.GetComponent<BulletController>().target = target;
 
-            Debug.Log("SHOOT");
             shootTime = 0;
         }
     }

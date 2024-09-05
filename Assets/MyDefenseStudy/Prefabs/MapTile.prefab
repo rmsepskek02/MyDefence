@@ -118,3 +118,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dbbda73f66d4c84e80e392211a7d507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverMaterial: {fileID: 2100000, guid: 271474585dcdfb54886e8580f40774cc, type: 2}

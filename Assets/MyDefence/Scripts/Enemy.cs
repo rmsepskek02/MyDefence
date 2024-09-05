@@ -58,7 +58,7 @@ namespace MyDefence
         {
             if(wayPointIndex == WayPoints.points.Length - 1)
             {
-                Debug.Log("종점 도착");
+                //Debug.Log("종점 도착");
                 //게임 오브젝트 kill
                 Destroy(this.gameObject);
                 //

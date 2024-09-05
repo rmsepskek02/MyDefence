@@ -16,8 +16,10 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(target != null)
+        if (target != null)
             MoveToTarget(target);
+        else
+            Destroy(this.gameObject);
     }
 
     // 타겟으로 이동
@@ -37,7 +39,6 @@ public class BulletController : MonoBehaviour
         // 거리값 계산
         if (Vector3.Distance(_target.transform.position, transform.position) <= 0.5f)
         {
-            Debug.Log("HIT");
             // 타겟 파괴
             Destroy(_target);
             // 이펙트 생성
