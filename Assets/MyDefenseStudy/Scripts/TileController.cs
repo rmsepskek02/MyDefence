@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TileController : MonoBehaviour
 {
@@ -23,22 +24,35 @@ public class TileController : MonoBehaviour
 
     }
 
-    // ¸¶¿ì½º°¡ ¿ÀºêÁ§Æ®¿¡ µé¾î¿ÔÀ» ¶§ È£Ãâ
+    // ë§ˆìš°ìŠ¤ê°€ ì˜¤ë¸Œì íŠ¸ì— ë“¤ì–´ì™”ì„ ë•Œ í˜¸ì¶œ
     void OnMouseEnter()
     {
+        if (bm.GetTurretToBuild() == null) return;
+        mesh.enabled = true;
         mesh.material = hoverMaterial;
     }
 
-    // ¸¶¿ì½º°¡ ¿ÀºêÁ§Æ®¿¡¼­ ³ª°¬À» ¶§ È£Ãâ
+    // ë§ˆìš°ìŠ¤ê°€ ì˜¤ë¸Œì íŠ¸ì—ì„œ ë‚˜ê°”ì„ ë•Œ í˜¸ì¶œ
     void OnMouseExit()
     {
+        mesh.enabled = false;
         mesh.material = startMaterial;
     }
 
-    // ¸¶¿ì½º Å¬¸¯ ½Ã È£Ãâ
+    // ë§ˆìš°ìŠ¤ í´ë¦­ ì‹œ í˜¸ì¶œ
     void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("UI ìš”ì†Œ ìœ„ë¥¼ í´ë¦­í–ˆìŠµë‹ˆë‹¤.");
+            return;
+        }
         if (turretObj != null) return;
-        turretObj = Instantiate(bm.turret, transform.position, Quaternion.identity);
+        if (bm.GetTurretToBuild() == null)
+        {
+            Debug.Log("í„°ë ›ì„ ì„¤ì¹˜í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.!!");
+            return;
+        };
+        turretObj = Instantiate(bm.GetTurretToBuild(), transform.position, Quaternion.identity);
     }
 }

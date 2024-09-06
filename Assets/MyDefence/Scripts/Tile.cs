@@ -33,12 +33,14 @@ namespace MyDefence
             //√ ±‚»≠
             //rend = this.transform.GetComponent<Renderer>();
             rend = this.GetComponent<Renderer>();
+            rend.enabled = false;
             //startColor = rend.material.color;
             startMaterial = rend.material;
         }
 
         private void OnMouseEnter()
-        {
+        {            
+            rend.enabled = true;
             //rend.material.color = hoverColor;
             rend.material = hoverMaterial;
         }
@@ -57,6 +59,7 @@ namespace MyDefence
 
         private void OnMouseExit()
         {
+            rend.enabled = false;
             //rend.material.color = startColor;
             rend.material = startMaterial;
         }

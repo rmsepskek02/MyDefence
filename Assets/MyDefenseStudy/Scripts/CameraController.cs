@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float panSpeed = 20f; // Ä«¸Ş¶ó ÀÌµ¿ ¼Óµµ
-    public float panBorderThickness = 10f; // È­¸é °¡ÀåÀÚ¸® °æ°è µÎ²² (¸¶¿ì½º À§Ä¡ °¨Áö¿ë)
+    public float moveSpeed = 20f; // ì¹´ë©”ë¼ ì´ë™ ì†ë„
+    public float panBorderThickness = 10f; // í™”ë©´ ê°€ì¥ìë¦¬ ê²½ê³„ ë‘ê»˜ (ë§ˆìš°ìŠ¤ ìœ„ì¹˜ ê°ì§€ìš©)
     public float zoomSpeed = 10f;
     public float minDistance = 20f;
-    public float maxDistance = 70f;
+    public float maxDistance = 40f;
     public bool isMove = true;
 
     // Start is called before the first frame update
@@ -34,35 +34,35 @@ public class CameraController : MonoBehaviour
 
     void InputKeyboard()
     {
-        if (Input.GetKey(KeyCode.A)) { transform.Translate(Vector3.left * Time.deltaTime); }
-        if (Input.GetKey(KeyCode.D)) { transform.Translate(Vector3.right * Time.deltaTime); }
-        if (Input.GetKey(KeyCode.S)) { transform.Translate(Vector3.down * Time.deltaTime); }
-        if (Input.GetKey(KeyCode.W)) { transform.Translate(Vector3.up * Time.deltaTime); }
+        if (Input.GetKey(KeyCode.A)) { transform.Translate(Vector3.left * Time.deltaTime * moveSpeed); }
+        if (Input.GetKey(KeyCode.D)) { transform.Translate(Vector3.right * Time.deltaTime * moveSpeed); }
+        if (Input.GetKey(KeyCode.S)) { transform.Translate(Vector3.down * Time.deltaTime * moveSpeed); }
+        if (Input.GetKey(KeyCode.W)) { transform.Translate(Vector3.up * Time.deltaTime * moveSpeed); }
     }
 
     void InputMouse()
     {
-        // ¸¶¿ì½º°¡ È­¸éÀÇ ¿ŞÂÊ ³¡¿¡ ÀÖÀ» ¶§
+        // ë§ˆìš°ìŠ¤ê°€ í™”ë©´ì˜ ì™¼ìª½ ëì— ìˆì„ ë•Œ
         if (Input.mousePosition.x <= panBorderThickness)
-            transform.Translate(Vector3.left * Time.deltaTime);
-        // ¸¶¿ì½º°¡ È­¸éÀÇ ¿À¸¥ÂÊ ³¡¿¡ ÀÖÀ» ¶§
+            transform.Translate(Vector3.left * Time.deltaTime * moveSpeed);
+        // ë§ˆìš°ìŠ¤ê°€ í™”ë©´ì˜ ì˜¤ë¥¸ìª½ ëì— ìˆì„ ë•Œ
         if (Input.mousePosition.x >= Screen.width - panBorderThickness)
-            transform.Translate(Vector3.right * Time.deltaTime);
-        // ¸¶¿ì½º°¡ È­¸éÀÇ ¾Æ·¡ÂÊ ³¡¿¡ ÀÖÀ» ¶§
+            transform.Translate(Vector3.right * Time.deltaTime * moveSpeed);
+        // ë§ˆìš°ìŠ¤ê°€ í™”ë©´ì˜ ì•„ë˜ìª½ ëì— ìˆì„ ë•Œ
         if (Input.mousePosition.y <= panBorderThickness)
-            transform.Translate(Vector3.down * Time.deltaTime);
-        // ¸¶¿ì½º°¡ È­¸éÀÇ À§ÂÊ ³¡¿¡ ÀÖÀ» ¶§
+            transform.Translate(Vector3.down * Time.deltaTime * moveSpeed);
+        // ë§ˆìš°ìŠ¤ê°€ í™”ë©´ì˜ ìœ„ìª½ ëì— ìˆì„ ë•Œ
         if (Input.mousePosition.y >= Screen.height - panBorderThickness)
-            transform.Translate(Vector3.up * Time.deltaTime);
+            transform.Translate(Vector3.up * Time.deltaTime * moveSpeed);
     }
 
     void InputMouseWheel()
     {
         float zoomAmount = Input.GetAxis("Mouse ScrollWheel") * zoomSpeed * 100f;
-
-        if (transform.position.y >= 70f && zoomAmount < 0)
+        //Mathf.Clamp(zoomAmount, minDistance, maxDistance);
+        if (transform.position.y >= maxDistance && zoomAmount < 0)
             zoomAmount = 0;
-        if (transform.position.y <= 20f && zoomAmount > 0)
+        if (transform.position.y <= minDistance && zoomAmount > 0)
             zoomAmount = 0;
 
         transform.Translate(Vector3.forward * zoomAmount * Time.deltaTime);

@@ -5,26 +5,26 @@ using TMPro;
 
 namespace MyDefence
 {
-    //Enemy ½ºÆùÀ» °ü¸®ÇÏ´Â Å¬·¡½º
+    //Enemy ìŠ¤í°ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤ 
     public class SpawnManager : MonoBehaviour
     {
-        //ÇÊµå
+        //í•„ë“œ
         #region Variable
-        //enemy ÇÁ¸®ÆÕ
+        //enemy í”„ë¦¬íŒ¹
         public GameObject enemyPrefab;
-        //½ºÆù À§Ä¡(½ÃÀÛ À§Ä¡)
+        //ìŠ¤í° ìœ„ì¹˜(ì‹œì‘ ìœ„ì¹˜)
         public Transform startPoint;
 
-        //½ºÆù Å¸ÀÌ¸Ó
+        //ìŠ¤í° íƒ€ì´ë¨¸
         public float spawnTimer = 5f;
         private float countdown = 0f;
 
-        //¿şÀÌºê Ä«¿îÆ®
+        //ì›¨ì´ë¸Œ ì¹´ìš´íŠ¸
         private int waveCount = 0;
 
-        //ÅØ½ºÆ® UI
+        //í…ìŠ¤íŠ¸ UI
         public TextMeshProUGUI countdownText;
-        //½ºÆùÁßÀÌ¸é true, ¾Æ´Ï¸é false
+        //ìŠ¤í°ì¤‘ì´ë©´ true, ì•„ë‹ˆë©´ false
         bool isSpawn = false;       //
         #endregion
 
@@ -32,11 +32,11 @@ namespace MyDefence
         // Start is called before the first frame update
         void Start()
         {
-            //ÃÊ±âÈ­ - ½ÃÀÛ½Ã ´ë±â ½Ã°£
+            //ì´ˆê¸°í™” - ì‹œì‘ì‹œ ëŒ€ê¸° ì‹œê°„
             countdown = 2f;
             waveCount = 0;
 
-            //½ÃÀÛÁöÁ¡ À§Ä¡¿¡  Enemy 1°³¸¦ »ı¼º
+            //ì‹œì‘ì§€ì  ìœ„ì¹˜ì—  Enemy 1ê°œë¥¼ ìƒì„±
             //SpawnEnemy();
         }
 
@@ -47,18 +47,18 @@ namespace MyDefence
             Debug.Log($"countdown: {countdown}");
             if(countdown >= spawnTimer)
             {
-                //Å¸ÀÌ¸Ó ¸í·É
-                Debug.Log($"enemy »ı¼º");
+                //íƒ€ì´ë¨¸ ëª…ë ¹
+                Debug.Log($"enemy ìƒì„±");
 
-                //ÃÊ±âÈ­
+                //ì´ˆê¸°í™”
                 countdown = 0;
             }*/
             if (countdown <= 0f)
             {
-                //Å¸ÀÌ¸Ó ¸í·É
+                //íƒ€ì´ë¨¸ ëª…ë ¹
                 StartCoroutine(SpawnWave());
 
-                //ÃÊ±âÈ­
+                //ì´ˆê¸°í™”
                 countdown = spawnTimer;
             }
 
@@ -72,14 +72,14 @@ namespace MyDefence
 
         }
 
-        //½ÃÀÛÁöÁ¡ À§Ä¡¿¡ Enemy¸¦ »ı¼º
+        //ì‹œì‘ì§€ì  ìœ„ì¹˜ì— Enemyë¥¼ ìƒì„±
         private void SpawnEnemy()
         {
             Instantiate(enemyPrefab, startPoint.position, Quaternion.identity);
             //Instantiate(enemyPrefab);
         }
 
-        //¿şÀÌºê ÇÒ¶§¸¶´Ù 1¸¶¸®¾¿ Ãß°¡ ½ºÆù  1 - 2 - 3 - 4 - 5..
+        //ì›¨ì´ë¸Œ í• ë•Œë§ˆë‹¤ 1ë§ˆë¦¬ì”© ì¶”ê°€ ìŠ¤í°  1 - 2 - 3 - 4 - 5..
         IEnumerator SpawnWave()
         {
             isSpawn = true;
@@ -99,9 +99,9 @@ namespace MyDefence
 }
 
 /*
-À¯´ÏÆ¼ÀÇ ÇÊµå ÃÊ±âÈ­
-1. º¯¼ö ¼±¾ğ½Ã °ª ÃÊ±âÈ­         spawnTimer = 5f;
-2. public À» ¼±¾ğÈÄ ÀÎ½ºÆåÅÍ Ã¢¿¡¼­ °ª ÃÊ±âÈ­  spawnTimer = 3f;
-3. Start() ÇÔ¼ö¿¡¼­ º¯¼ö °ª ÃÊ±âÈ­    spawnTimer = 4f;
+ìœ ë‹ˆí‹°ì˜ í•„ë“œ ì´ˆê¸°í™”
+1. ë³€ìˆ˜ ì„ ì–¸ì‹œ ê°’ ì´ˆê¸°í™”         spawnTimer = 5f;
+2. public ì„ ì„ ì–¸í›„ ì¸ìŠ¤í™í„° ì°½ì—ì„œ ê°’ ì´ˆê¸°í™”  spawnTimer = 3f;
+3. Start() í•¨ìˆ˜ì—ì„œ ë³€ìˆ˜ ê°’ ì´ˆê¸°í™”    spawnTimer = 4f;
 spawnTimer : 5f -> 3f -> 4f
 */

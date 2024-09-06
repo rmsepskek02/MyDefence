@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MyDefence
 {
-    //ÅÍ·¿ °Ç¼³À» °ü¸®ÇÏ´Â Å¬·¡½º
+    //í„°ë › ê±´ì„¤ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
     public class BuildManager : MonoBehaviour
     {
         #region Singleton
@@ -24,13 +24,13 @@ namespace MyDefence
         }
         #endregion
 
-        //Å¸ÀÏ¿¡ ¼³Ä¡ÇÒ ÅÍ·¿
+        //íƒ€ì¼ì— ì„¤ì¹˜í•  í„°ë ›
         private GameObject turretToBuild;
         public GameObject basicTurretPrefab;
 
         private void Start()
         {
-            //ÃÊ±âÈ­
+            //ì´ˆê¸°í™”
             turretToBuild = basicTurretPrefab;
         }
 
