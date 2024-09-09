@@ -36,12 +36,14 @@ namespace Sample
 
         private void OnEnable()
         {
-            inputActions.Camera.Enable();
+            inputActions.Enable();
+            //inputActions.Camera.Enable();
         }
 
         private void OnDisable()
         {
-            inputActions.Camera.Disable();
+            inputActions.Disable();
+            //inputActions.Camera.Disable();
         }
 
         // Update is called once per frame

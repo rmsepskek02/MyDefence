@@ -6,15 +6,15 @@ namespace MyDefence
 {
     public class Bullet : MonoBehaviour
     {
-        //ÇÊµå
+        //í•„ë“œ
         #region Variable
-        //bulletÀÌ ÀÌµ¿ÇØ¼­ hit ÇÏ´Â target
+        //bulletì´ ì´ë™í•´ì„œ hit í•˜ëŠ” target
         private Transform target;
 
-        //bullet ÀÌµ¿ ¼Óµµ
+        //bullet ì´ë™ ì†ë„
         public float moveSpeed = 70f;
 
-        //impact ÀÌÆåÆ®
+        //impact ì´í™íŠ¸
         public GameObject bulletImpactPrefab;
         #endregion
 
@@ -38,27 +38,27 @@ namespace MyDefence
                 return;
             }
 
-            //ÀÌµ¿ÇÏ±â
+            //ì´ë™í•˜ê¸°
             Vector3 dir = target.position - transform.position;
             float distanceThisFrame = Time.deltaTime * moveSpeed;
             if (dir.magnitude < distanceThisFrame)
             {
-                //Hit·Î ÆÇÁ¤
+                //Hitë¡œ íŒì •
                 HitTarget();
                 return;
             }
             transform.Translate(dir.normalized * Time.deltaTime * moveSpeed, Space.World);
         }
 
-        //Å¸°ÙÀ» ¸ÂÃã
+        //íƒ€ê²Ÿì„ ë§ì¶¤
         void HitTarget()
         {
-            //Hit Ã³¸®
-            //Hit È¿°ú
+            //Hit ì²˜ë¦¬
+            //Hit íš¨ê³¼
             GameObject effectGo = Instantiate(bulletImpactPrefab, this.transform.position, Quaternion.identity);
             Destroy(effectGo, 2f);
 
-            //Å¸°Ù, ÅºÈ¯ °ÔÀÓ¿ÀºêÁ§Æ® kill (Destroy)
+            //íƒ€ê²Ÿ, íƒ„í™˜ ê²Œì„ì˜¤ë¸Œì íŠ¸ kill (Destroy)
             Destroy(target.gameObject);
             Destroy(this.gameObject);
         }

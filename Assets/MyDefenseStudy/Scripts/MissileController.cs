@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
+public class MissileController : MonoBehaviour
 {
-    public float bulletSpeed = 70.0f;
-    public float hitRange = 0.5f;
+    public float moveSpeed = 5.0f;
+    public float hitRange = 3.5f;
     public GameObject target;
     public GameObject bulletEffect;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -30,7 +30,7 @@ public class BulletController : MonoBehaviour
         Vector3 dir = _target.transform.position - transform.position;
         // 이동
         //transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
-        transform.Translate(dir * bulletSpeed * Time.deltaTime, Space.World);
+        transform.Translate(dir * moveSpeed * Time.deltaTime, Space.World);
         HitTartget(_target);
     }
 
@@ -50,12 +50,17 @@ public class BulletController : MonoBehaviour
         //    Destroy(gameObject);
         //}
         Vector3 dir = _target.transform.position - transform.position;
-        float distanceThisFrame = Time.deltaTime * bulletSpeed;
+        float distanceThisFrame = Time.deltaTime * moveSpeed;
         if (dir.magnitude < distanceThisFrame)
         {
             //Hit로 판정
             // 타겟 파괴
-            Destroy(_target);
+            Collider[] hitObj = Physics.OverlapSphere(transform.position, hitRange);
+            foreach (Collider obj in hitObj)
+            {
+                if(obj.gameObject.tag == "Enemy")
+                    Destroy(obj.gameObject);
+            }
             // 이펙트 생성
             GameObject _bulletEffect = Instantiate(bulletEffect, transform.position, Quaternion.identity);
             // 이펙트 파괴 예약

@@ -1,36 +1,41 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace MyDefence
 {
     public class Tile : MonoBehaviour
     {
         #region Variables
-        //Å¸ÀÏ¿¡ ¼³Ä¡µÈ ÅÍ·¿ °ÔÀÓ¿ÀºêÁ§Æ® °´Ã¼
+        //íƒ€ì¼ì— ì„¤ì¹˜ëœ í„°ë › ê²Œì„ì˜¤ë¸Œì íŠ¸ ê°ì²´
         private GameObject turret;
+        //ë¹Œë“œë§¤ë‹ˆì € ê°ì²´
+        private BuildManager buildManager;
 
-        //·»´õ·¯ ÀÎ½ºÅÏ½º
+        //ë Œë”ëŸ¬ ì¸ìŠ¤í„´ìŠ¤
         private Renderer rend;
 
-        //¸¶¿ì½º°¡ À§¿¡ ÀÖÀ»¶§ Å¸ÀÏ ÄÃ·¯°ª
+        //ë§ˆìš°ìŠ¤ê°€ ìœ„ì— ìˆì„ë•Œ íƒ€ì¼ ì»¬ëŸ¬ê°’
         //public Color hoverColor;
-        //¸ÊÅ¸ÀÏÀÇ ±âº» Color
+        //ë§µíƒ€ì¼ì˜ ê¸°ë³¸ Color
         //private Color startColor;
 
-        //¸¶¿ì½º°¡ À§¿¡ ÀÖÀ»¶§ Å¸ÀÏ ¸ŞÅÍ¸®¾ó
+        //ë§ˆìš°ìŠ¤ê°€ ìœ„ì— ìˆì„ë•Œ íƒ€ì¼ ë©”í„°ë¦¬ì–¼
         public Material hoverMaterial;
-        //¸ÊÅ¸ÀÏÀÇ ±âº» Material
+        //ë§µíƒ€ì¼ì˜ ê¸°ë³¸ Material
         private Material startMaterial;
 
-        //ÅÍ·¿ÇÁ¸®ÆÕ
+        //í„°ë ›í”„ë¦¬íŒ¹
         public GameObject turretPrefab;
 
-        //ÅÍ·¿ ¼³Ä¡ À§Ä¡ º¸Á¤°ª
+        //í„°ë › ì„¤ì¹˜ ìœ„ì¹˜ ë³´ì •ê°’
         public Vector3 offset;
         #endregion
 
         private void Start()
         {
-            //ÃÊ±âÈ­
+            //ì´ˆê¸°í™”
+            buildManager = BuildManager.Instance;
+
             //rend = this.transform.GetComponent<Renderer>();
             rend = this.GetComponent<Renderer>();
             rend.enabled = false;
@@ -39,7 +44,19 @@ namespace MyDefence
         }
 
         private void OnMouseEnter()
-        {            
+        {
+            //ë§ˆìš°ìŠ¤ í¬ì¸í„°ê°€ UIìœ„ì— ìˆìœ¼ë©´
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+
+            //í„°ë ›ì„ ì„ íƒí•˜ì§€ ì•Šìœ¼ë©´
+            if (buildManager.GetTurretToBuild() == null)
+            {
+                return;
+            }
+
             rend.enabled = true;
             //rend.material.color = hoverColor;
             rend.material = hoverMaterial;
@@ -47,14 +64,26 @@ namespace MyDefence
 
         private void OnMouseDown()
         {
-            if (turret != null)
+            //ë§ˆìš°ìŠ¤ í¬ì¸í„°ê°€ UIìœ„ì— ìˆìœ¼ë©´
+            if (EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.Log("ÀÌ¹Ì ÅÍ·¿ÀÌ ¼³Ä¡ µÇ¾î ÀÖ½À´Ï´Ù");
                 return;
             }
 
-            Debug.Log("¸¶¿ì½º Å¬¸¯ - ¿©±â¿¡ ÅÍ·¿ ¼³Ä¡");
-            turret = Instantiate(BuildManager.Instance.GetTurretToBuild(), this.transform.position + offset, Quaternion.identity);
+            if (turret != null)
+            {
+                Debug.Log("ì´ë¯¸ í„°ë ›ì´ ì„¤ì¹˜ ë˜ì–´ ìˆìŠµë‹ˆë‹¤");
+                return;
+            }
+
+            if (buildManager.GetTurretToBuild() == null)
+            {
+                Debug.Log("í„°ë ›ì„ ì„¤ì¹˜í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤"); //í„°ë ›ì„ ì„ íƒí•˜ì§€ ì•Šì€ ìƒíƒœ
+                return;
+            }
+
+            Debug.Log("ë§ˆìš°ìŠ¤ í´ë¦­ - ì—¬ê¸°ì— í„°ë › ì„¤ì¹˜");
+            turret = Instantiate(buildManager.GetTurretToBuild(), this.transform.position + offset, Quaternion.identity);
         }
 
         private void OnMouseExit()

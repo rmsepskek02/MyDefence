@@ -2,22 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrurretController : MonoBehaviour
+public class MissileLauncherController : MonoBehaviour
 {
     // 기즈모 색상 설정
     public Color gizmoColor;
-    public float gizmoRadius = 12.0f;
     public float attackRange = 12.0f;
     public GameObject[] enemyList;
     public float rotationSpeed = 5.0f;
     public Transform partToRotate;
-    public GameObject bullet;
+    public GameObject missile;
     public Transform firePoint;
     public float shootDelay = 4.0f;
     float shootTime = 0;
     float time = 0;
     GameObject closestObject = null;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +29,6 @@ public class TrurretController : MonoBehaviour
         closestObject = CheckMinDistance(enemyList);
         TurnObject(closestObject);
     }
-
     // Enemy 모두 찾기
     GameObject[] FindEnemy()
     {
@@ -67,7 +64,7 @@ public class TrurretController : MonoBehaviour
         }
         if (_closestObject == null) return null;
         // 사거리 계산
-        if (Vector3.Distance(_closestObject.transform.position, transform.position) > gizmoRadius)
+        if (Vector3.Distance(_closestObject.transform.position, transform.position) > attackRange)
             _closestObject = null;
 
         return _closestObject;
@@ -98,10 +95,9 @@ public class TrurretController : MonoBehaviour
         if (shootDelay <= shootTime)
         {
             // 총알 생성
-            GameObject _bullet = Instantiate(bullet, firePoint.transform.position, firePoint.rotation);
-            
+            GameObject _missile = Instantiate(missile, firePoint.transform.position, firePoint.rotation);
             // 총알의 타겟 설정
-            _bullet.GetComponent<BulletController>().target = target;
+            _missile.GetComponent<MissileController>().target = target;
 
             shootTime = 0;
         }
@@ -111,7 +107,6 @@ public class TrurretController : MonoBehaviour
     {
         Gizmos.color = gizmoColor;
         // 기즈모로 구 그리기
-        Gizmos.DrawWireSphere(transform.position, gizmoRadius);
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
-
 }
