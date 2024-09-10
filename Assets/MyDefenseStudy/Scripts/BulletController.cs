@@ -35,7 +35,7 @@ public class BulletController : MonoBehaviour
     }
 
     // 타켓 Hit
-    void HitTartget(GameObject _target)
+    protected virtual void HitTartget(GameObject _target)
     {
         // 거리값 계산
         //if (Vector3.Distance(_target.transform.position, transform.position) <= hitRange)
@@ -55,7 +55,7 @@ public class BulletController : MonoBehaviour
         {
             //Hit로 판정
             // 타겟 파괴
-            Destroy(_target);
+            OnDamaged(_target.transform);
             // 이펙트 생성
             GameObject _bulletEffect = Instantiate(bulletEffect, transform.position, Quaternion.identity);
             // 이펙트 파괴 예약
@@ -65,7 +65,10 @@ public class BulletController : MonoBehaviour
             return;
         }
     }
-
+    void OnDamaged(Transform target)
+    {
+        Destroy(target.gameObject);
+    }
     // 기즈모 그리기
     void OnDrawGizmos()
     {

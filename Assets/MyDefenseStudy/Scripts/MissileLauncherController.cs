@@ -95,7 +95,7 @@ public class MissileLauncherController : MonoBehaviour
         if (shootDelay <= shootTime)
         {
             // 총알 생성
-            GameObject _missile = Instantiate(missile, firePoint.transform.position, firePoint.rotation);
+            GameObject _missile = Instantiate(missile, firePoint.transform.position, Quaternion.identity);
             // 총알의 타겟 설정
             _missile.GetComponent<MissileController>().target = target;
 

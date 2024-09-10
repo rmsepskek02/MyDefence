@@ -11,7 +11,7 @@ public class MissileController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        transform.LookAt(target.transform.position);
     }
 
     // Update is called once per frame
@@ -50,6 +50,7 @@ public class MissileController : MonoBehaviour
         //    Destroy(gameObject);
         //}
         Vector3 dir = _target.transform.position - transform.position;
+        
         float distanceThisFrame = Time.deltaTime * moveSpeed;
         if (dir.magnitude < distanceThisFrame)
         {
@@ -58,7 +59,7 @@ public class MissileController : MonoBehaviour
             Collider[] hitObj = Physics.OverlapSphere(transform.position, hitRange);
             foreach (Collider obj in hitObj)
             {
-                if(obj.gameObject.tag == "Enemy")
+                if (obj.gameObject.tag == "Enemy")
                     Destroy(obj.gameObject);
             }
             // 이펙트 생성

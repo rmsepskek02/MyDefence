@@ -9,7 +9,7 @@ namespace MyDefence
         //필드
         #region Variable
         //bullet이 이동해서 hit 하는 target
-        private Transform target;
+        protected Transform target;
 
         //bullet 이동 속도
         public float moveSpeed = 70f;
@@ -21,12 +21,6 @@ namespace MyDefence
         public void SetTarget(Transform target)
         {
             this.target = target;
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
         }
 
         // Update is called once per frame
@@ -48,19 +42,29 @@ namespace MyDefence
                 return;
             }
             transform.Translate(dir.normalized * Time.deltaTime * moveSpeed, Space.World);
+
+            //타겟으로 방향을 바라본다(회전한다)
+            transform.LookAt(target);
         }
 
         //타겟을 맞춤
-        void HitTarget()
+        protected virtual void HitTarget()
         {
-            //Hit 처리
             //Hit 효과
             GameObject effectGo = Instantiate(bulletImpactPrefab, this.transform.position, Quaternion.identity);
             Destroy(effectGo, 2f);
 
-            //타겟, 탄환 게임오브젝트 kill (Destroy)
-            Destroy(target.gameObject);
+            //타겟에 데미지 준다
+            Damage(target);            
+
+            //탄환 게임오브젝트 kill (Destroy)
             Destroy(this.gameObject);
+        }
+
+        protected void Damage(Transform target)
+        {
+            //kill(Destroy)
+            Destroy(target.gameObject);
         }
     }
 }

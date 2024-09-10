@@ -70,7 +70,8 @@ public class CameraController : MonoBehaviour
 
     void EnableCamera()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            isMove = !isMove;
+        isMove = false;
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //    isMove = !isMove;
     }
 }

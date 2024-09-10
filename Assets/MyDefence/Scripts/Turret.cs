@@ -4,85 +4,81 @@ using UnityEngine;
 
 namespace MyDefence
 {
-    //ÅÍ·¿À» °ü¸®ÇÏ´Â Å¬·¡½º
+    //í„°ë ›ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
     public class Turret : MonoBehaviour
     {
-        //ÇÊµå
+        //í•„ë“œ
         #region Variable
-        private Transform target;       //Å¸°Ù
-        public Transform partToRotate;  //ÅÍ·¿ È¸ÀüÀ» °ü¸®ÇÏ´Â ¿ÀºêÁ§Æ®
+        private Transform target;       //íƒ€ê²Ÿ
+        public Transform partToRotate;  //í„°ë › íšŒì „ì„ ê´€ë¦¬í•˜ëŠ” ì˜¤ë¸Œì íŠ¸
 
-        public float attackRange = 7f;  //°ø°İ ¹üÀ§
+        public float attackRange = 7f;  //ê³µê²© ë²”ìœ„
 
-        //target Ã£±â Å¸ÀÌ¸Ó
+        //target ì°¾ê¸° íƒ€ì´ë¨¸
         public float serachTimer = 0.5f;
         private float countdown = 0f;
 
-        //È¸Àü
+        //íšŒì „
         public float turnSpeed = 10f;
 
-        //½¸ Å¸ÀÌ¸Ó
+        //ìŠ› íƒ€ì´ë¨¸
         public float shootTimer = 1f;
         private float shootCountdown = 0f;
 
-        //¹ß»ç
+        //ë°œì‚¬
         public GameObject bulletPrefab;
         public Transform firePoint;
+
+        //ì  íƒœê·¸
+        public string enemyTag = "Enemy";
         #endregion
-
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
 
         // Update is called once per frame
         void Update()
         {
-            //0.5ÃÊ¸¶´Ù Å¸°Ù Ã£±â ½ÇÇà
+            //0.5ì´ˆë§ˆë‹¤ íƒ€ê²Ÿ ì°¾ê¸° ì‹¤í–‰
             if (countdown <= 0f)
             {
-                //Å¸ÀÌ¸Ó ½ÇÇà¹®
+                //íƒ€ì´ë¨¸ ì‹¤í–‰ë¬¸
                 UpdateTarget();
 
-                //Å¸ÀÌ¸Ó ÃÊ±âÈ­
+                //íƒ€ì´ë¨¸ ì´ˆê¸°í™”
                 countdown = serachTimer;
             }
             countdown -= Time.deltaTime;
 
-            //Å¸°ÙÀ» Ã£Áö ¸øÇßÀ¸¸é
+            //íƒ€ê²Ÿì„ ì°¾ì§€ ëª»í–ˆìœ¼ë©´
             if (target == null)
             {
                 return;
             }
 
-            //Å¸°ÙÀ» ÇâÇØ ÃÑ±¸¸¦ È¸Àü
+            //íƒ€ê²Ÿì„ í–¥í•´ ì´êµ¬ë¥¼ íšŒì „
             LockOn();
 
-            //ÅÍ·¿ÀÌ 1ÃÊ¸¶´Ù 1¹ß¾¿ ½î±â
+            //í„°ë ›ì´ 1ì´ˆë§ˆë‹¤ 1ë°œì”© ì˜ê¸°
             if(shootCountdown <= 0f)
             {
-                //Å¸ÀÌ¸Ó ¸í·É¹®
+                //íƒ€ì´ë¨¸ ëª…ë ¹ë¬¸
                 Shoot();
 
-                //Å¸ÀÌ¸Ó ÃÊ±âÈ­
+                //íƒ€ì´ë¨¸ ì´ˆê¸°í™”
                 shootCountdown = shootTimer;
             }
             shootCountdown -= Time.deltaTime;
         }
 
-        //½¸ Ã³¸®
+        //ìŠ› ì²˜ë¦¬
         void Shoot()
         {
             //Debug.Log("Shoot!!!!!!!");
-            //ÃÑ±¸(Fire Point) À§Ä¡¿¡ ÅºÈ¯ °´Ã¼ »ı¼º(Instiate)ÇÏ±â
+            //ì´êµ¬(Fire Point) ìœ„ì¹˜ì— íƒ„í™˜ ê°ì²´ ìƒì„±(Instiate)í•˜ê¸°
             GameObject bulletGo = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Bullet bullet = bulletGo.GetComponent<Bullet>();
             bullet.SetTarget(target);
         }
 
-        //Å¸°ÙÀ» ÇâÇØ ÃÑ±¸¸¦ È¸Àü
+        //íƒ€ê²Ÿì„ í–¥í•´ ì´êµ¬ë¥¼ íšŒì „
         void LockOn()
         {
             Vector3 dir = target.position - partToRotate.position;
@@ -91,16 +87,16 @@ namespace MyDefence
             partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
         }
 
-        //ÀûµéÁß °ø°İÇÒ target ÀûÀ» Ã£´Â´Ù
+        //ì ë“¤ì¤‘ ê³µê²©í•  target ì ì„ ì°¾ëŠ”ë‹¤
         void UpdateTarget()
         {
             //Debug.Log("UpdateTarget=======");
-            //"Enemy" ÅÂ±×¸¦ °¡Áø ¿ÀºêÁ§Æ®µé °´Ã¼ °¡Á®¿À±â
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            //"Enemy" íƒœê·¸ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ë“¤ ê°ì²´ ê°€ì ¸ì˜¤ê¸°
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
 
-            //°Å¸®°¡ °¡Àå °¡±î¿î Àû Ã£±â
-            float minDistance = float.MaxValue; //ÃÖ¼Ò°Å¸®
-            GameObject minEnemy = null;         //ÃÖ¼Ò°Å¸®¿¡ ÀÖ´Â Àû
+            //ê±°ë¦¬ê°€ ê°€ì¥ ê°€ê¹Œìš´ ì  ì°¾ê¸°
+            float minDistance = float.MaxValue; //ìµœì†Œê±°ë¦¬
+            GameObject minEnemy = null;         //ìµœì†Œê±°ë¦¬ì— ìˆëŠ” ì 
 
             foreach (GameObject enemy in enemies)
             {
@@ -112,7 +108,7 @@ namespace MyDefence
                 }
             }
 
-            //°¡Àå °¡±î¿î ÀûÀÌ °ø°İ ¹üÀ§ ¾È¿¡ ÀÖ´ÂÁö Ã¼Å©
+            //ê°€ì¥ ê°€ê¹Œìš´ ì ì´ ê³µê²© ë²”ìœ„ ì•ˆì— ìˆëŠ”ì§€ ì²´í¬
             if(minEnemy != null && minDistance < attackRange)
             {
                 target = minEnemy.transform;
@@ -123,7 +119,7 @@ namespace MyDefence
             }
         }
 
-        //°ø°İ¹üÀ§ È®ÀÎ¿ë ±âÁî¸ğ ±×¸®±â
+        //ê³µê²©ë²”ìœ„ í™•ì¸ìš© ê¸°ì¦ˆëª¨ ê·¸ë¦¬ê¸°
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;

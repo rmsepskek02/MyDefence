@@ -23,11 +23,11 @@ namespace MyDefence
             buildManager.SetTurretToBuild(buildManager.basicTurretPrefab);
         }
 
-        //다른 터렛 버튼 클릭시 호출
-        public void SelectAnotherTurret()
+        //미사일 런처 버튼 클릭시 호출
+        public void SelectMissileLauncher()
         {
             //설치할 터렛에 다른 터렛(프리팹)을 저장
-            buildManager.SetTurretToBuild(buildManager.anotherTurretPrefab);
+            buildManager.SetTurretToBuild(buildManager.missileLauncherPrefab);
         }
     }
 }

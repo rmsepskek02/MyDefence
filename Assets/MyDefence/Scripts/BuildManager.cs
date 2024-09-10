@@ -30,14 +30,9 @@ namespace MyDefence
 
         //기본 터렛 프리팹
         public GameObject basicTurretPrefab;
-        //다른 터렛 프리팹
-        public GameObject anotherTurretPrefab;
+        //미사일 런처 프리팹
+        public GameObject missileLauncherPrefab;
         #endregion
-
-        private void Start()
-        {
-            
-        }
 
         public GameObject GetTurretToBuild()
         {
