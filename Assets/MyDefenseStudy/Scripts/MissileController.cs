@@ -2,40 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileController : MonoBehaviour
+public class MissileController : BulletController
 {
-    public float moveSpeed = 5.0f;
-    public float hitRange = 3.5f;
-    public GameObject target;
-    public GameObject bulletEffect;
+    public string enemyTag = "Enemy";
     // Start is called before the first frame update
     void Start()
     {
         transform.LookAt(target.transform.position);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (target != null)
-            MoveToTarget(target);
-        else
-            Destroy(this.gameObject);
-    }
-
-    // 타겟으로 이동
-    public void MoveToTarget(GameObject _target)
-    {
-        // 타겟으로 방향
-        Vector3 dir = _target.transform.position - transform.position;
-        // 이동
-        //transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
-        transform.Translate(dir * moveSpeed * Time.deltaTime, Space.World);
-        HitTartget(_target);
-    }
-
     // 타켓 Hit
-    void HitTartget(GameObject _target)
+    protected override void HitTartget(GameObject _target)
     {
         // 거리값 계산
         //if (Vector3.Distance(_target.transform.position, transform.position) <= hitRange)
@@ -54,14 +31,7 @@ public class MissileController : MonoBehaviour
         float distanceThisFrame = Time.deltaTime * moveSpeed;
         if (dir.magnitude < distanceThisFrame)
         {
-            //Hit로 판정
-            // 타겟 파괴
-            Collider[] hitObj = Physics.OverlapSphere(transform.position, hitRange);
-            foreach (Collider obj in hitObj)
-            {
-                if (obj.gameObject.tag == "Enemy")
-                    Destroy(obj.gameObject);
-            }
+            Explosion();
             // 이펙트 생성
             GameObject _bulletEffect = Instantiate(bulletEffect, transform.position, Quaternion.identity);
             // 이펙트 파괴 예약
@@ -69,6 +39,18 @@ public class MissileController : MonoBehaviour
             // 총알 파괴
             Destroy(gameObject);
             return;
+        }
+    }
+
+    void Explosion()
+    {
+        //Hit로 판정
+        // 타겟 파괴
+        Collider[] hitObj = Physics.OverlapSphere(transform.position, hitRange);
+        foreach (Collider obj in hitObj)
+        {
+            if (obj.gameObject.tag == enemyTag)
+                Destroy(obj.gameObject);
         }
     }
 

@@ -164,11 +164,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gizmoColor: {r: 0.15566039, g: 0.21392688, b: 1, a: 0}
+  gizmoRadius: 12
   attackRange: 12
   enemyList: []
   rotationSpeed: 5
   partToRotate: {fileID: 9164592433069406642}
-  missile: {fileID: 8582654477067529325, guid: 2958acad096a0fe41bb9361a3da4e619, type: 3}
+  bullet: {fileID: 8582654477067529325, guid: 2958acad096a0fe41bb9361a3da4e619, type: 3}
   firePoint: {fileID: 4828254227076795992}
   shootDelay: 4
 --- !u!1 &4131982178869974637

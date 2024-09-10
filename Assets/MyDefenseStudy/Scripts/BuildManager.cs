@@ -8,6 +8,7 @@ public class BuildManager : MonoBehaviour
     private GameObject turretToBuild;
     public GameObject basicTurretPrefab;
     public GameObject AnotherTurretPrefab;
+    public int cost = 0;
     private void Awake()
     {
         instance = this;
@@ -32,11 +33,14 @@ public class BuildManager : MonoBehaviour
     public void OnClickTurret()
     {
         Debug.Log("SELECT TURRET");
+        cost = 100;
         turretToBuild = basicTurretPrefab;
     }
     public void OnClickAnotherTurret()
     {
         Debug.Log("SELECT ANOTHER TURRET");
+        cost = 250;
         turretToBuild = AnotherTurretPrefab;
     }
+
 }

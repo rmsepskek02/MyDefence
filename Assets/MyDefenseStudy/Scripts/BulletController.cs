@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public float bulletSpeed = 70.0f;
+    public float moveSpeed = 70.0f;
     public float hitRange = 0.5f;
     public GameObject target;
     public GameObject bulletEffect;
@@ -30,7 +30,7 @@ public class BulletController : MonoBehaviour
         Vector3 dir = _target.transform.position - transform.position;
         // 이동
         //transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime);
-        transform.Translate(dir * bulletSpeed * Time.deltaTime, Space.World);
+        transform.Translate(dir * moveSpeed * Time.deltaTime, Space.World);
         HitTartget(_target);
     }
 
@@ -50,7 +50,7 @@ public class BulletController : MonoBehaviour
         //    Destroy(gameObject);
         //}
         Vector3 dir = _target.transform.position - transform.position;
-        float distanceThisFrame = Time.deltaTime * bulletSpeed;
+        float distanceThisFrame = Time.deltaTime * moveSpeed;
         if (dir.magnitude < distanceThisFrame)
         {
             //Hit로 판정

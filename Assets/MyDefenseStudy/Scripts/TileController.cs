@@ -53,6 +53,23 @@ public class TileController : MonoBehaviour
             Debug.Log("터렛을 설치하지 못했습니다.!!");
             return;
         };
+
+        if (CheckMoney(bm.cost) == false) return;
         turretObj = Instantiate(bm.GetTurretToBuild(), transform.position, Quaternion.identity);
+        Debug.Log($"건설하고 남은돈: {PlayerStats.money}");
+    }
+
+    bool CheckMoney(int cost)
+    {
+        if (PlayerStats.money - cost >= 0)
+        {
+            PlayerStats.money -= cost;
+            return true;
+        }
+        else
+        {
+            Debug.Log("돈이 부족합니다");
+            return false;
+        }
     }
 }
