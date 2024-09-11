@@ -1,3 +1,4 @@
+
 namespace Sample
 {
     public interface IDamageable

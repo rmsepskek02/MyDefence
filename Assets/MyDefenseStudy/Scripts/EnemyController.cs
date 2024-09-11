@@ -21,26 +21,29 @@ public class EnemyController : MonoBehaviour
         TranslateObj(wpTr, wpIdx);
     }
 
-    // enemy ÀÌµ¿ ¾Ë°í¸®Áò
+    // enemy ì´ë™ ì•Œê³ ë¦¬ì¦˜
     void TranslateObj(List<Transform> objTrList, int i)
     {
-        // idx °ªÀÌ ListÀÇ index¸¦ ³Ñ¾î°¡Áö ¾Êµµ·Ï
+        // idx ê°’ì´ Listì˜ indexë¥¼ ë„˜ì–´ê°€ì§€ ì•Šë„ë¡
         if (wpIdx >= objTrList.Count) wpIdx = objTrList.Count - 1; 
 
-        // WayPoint¿¡ µµÂøÇÏÁö ¾ÊÀº °æ¿ì WayPoint·Î ÀÌµ¿
+        // WayPointì— ë„ì°©í•˜ì§€ ì•Šì€ ê²½ìš° WayPointë¡œ ì´ë™
         if (!ArePositionsSimilar(transform.position, objTrList[i].position, 0.5f))
             transform.Translate(wpVector[i] * Time.deltaTime * moveSpeed);
 
-        // µµÂøÇß´Ù¸é ´ÙÀ½ ¿şÀÌÆ÷ÀÎÆ®·Î °¡µµ·Ï idx Áõ°¡
+        // ë„ì°©í–ˆë‹¤ë©´ ë‹¤ìŒ ì›¨ì´í¬ì¸íŠ¸ë¡œ ê°€ë„ë¡ idx ì¦ê°€
         else
             wpIdx++;
 
-        // Á¾Á¡ µµÂø
+        // ì¢…ì  ë„ì°©
         if(ArePositionsSimilar(transform.position, objTrList[objTrList.Count - 1].position, 0.5f))
+        {
+            PlayerStats.ReduceLife();
             Destroy(this.gameObject);
+        }
     }
 
-    // µÎ ObjÀÇ À§Ä¡°ªÀÌ ¾ó¸¶³ª ºñ½ÁÇÑÁö 
+    // ë‘ Objì˜ ìœ„ì¹˜ê°’ì´ ì–¼ë§ˆë‚˜ ë¹„ìŠ·í•œì§€ 
     bool ArePositionsSimilar(Vector3 posA, Vector3 posB, float tolerance)
     {
         return Vector3.Distance(posA, posB) <= tolerance;

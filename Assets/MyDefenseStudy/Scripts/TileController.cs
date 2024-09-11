@@ -8,6 +8,7 @@ public class TileController : MonoBehaviour
     MeshRenderer mesh;
     BuildManager bm;
     public Material hoverMaterial;
+    public GameObject createEffect;
     private TurretBlueprint turretBlueprint;
     private Material startMaterial;
     private GameObject turretObj;
@@ -28,9 +29,20 @@ public class TileController : MonoBehaviour
     // 마우스가 오브젝트에 들어왔을 때 호출
     void OnMouseEnter()
     {
-        if (bm.GetTurretToBuild() == null) return;
+        turretBlueprint = bm.GetTurretToBuild();
+        if (turretBlueprint == null) return;
+
         mesh.enabled = true;
         mesh.material = hoverMaterial;
+
+        if (turretBlueprint.cost > PlayerStats.Money)
+        {
+            hoverMaterial.color = Color.red;
+        }
+        else
+        {
+            hoverMaterial.color = Color.white;
+        }
     }
 
     // 마우스가 오브젝트에서 나갔을 때 호출
@@ -60,6 +72,8 @@ public class TileController : MonoBehaviour
         if (PlayerStats.UseMoney(turretBlueprint.cost) == true)
         {
             turretObj = Instantiate(turretBlueprint.turretPrefab, transform.position, Quaternion.identity);
+            GameObject _createEffect = Instantiate(createEffect, transform.position, Quaternion.identity);
+            Destroy(_createEffect, 2f);
             Debug.Log($"건설하고 남은돈: {PlayerStats.Money}");
         }
     }
