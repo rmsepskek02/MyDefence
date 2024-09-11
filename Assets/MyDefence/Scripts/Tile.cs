@@ -8,6 +8,10 @@ namespace MyDefence
         #region Variables
         //타일에 설치된 터렛 게임오브젝트 객체
         private GameObject turret;
+
+        //현재 선택된 터렛 blueprint(prefab, cost, ....)
+        private TurretBlueprint blueprint;
+
         //빌드매니저 객체
         private BuildManager buildManager;
 
@@ -76,14 +80,22 @@ namespace MyDefence
                 return;
             }
 
-            if (buildManager.GetTurretToBuild() == null)
+            blueprint = buildManager.GetTurretToBuild();
+
+            if (blueprint == null)
             {
                 Debug.Log("터렛을 설치하지 못했습니다"); //터렛을 선택하지 않은 상태
                 return;
             }
 
-            Debug.Log("마우스 클릭 - 여기에 터렛 설치");
-            turret = Instantiate(buildManager.GetTurretToBuild(), this.transform.position + offset, Quaternion.identity);
+            //돈을 지불한다 100, 250
+            Debug.Log($"터렛 건설비용: {blueprint.cost}");
+            if(PlayerStats.UseMoney(blueprint.cost))
+            {   
+                turret = Instantiate(blueprint.turretPrefab, this.transform.position + offset, Quaternion.identity);
+
+                Debug.Log($"건설하고 남은돈: {PlayerStats.Money}");
+            }
         }
 
         private void OnMouseExit()

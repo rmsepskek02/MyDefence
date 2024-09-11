@@ -5,10 +5,8 @@ using UnityEngine;
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
-    private GameObject turretToBuild;
-    public GameObject basicTurretPrefab;
-    public GameObject AnotherTurretPrefab;
-    public int cost = 0;
+    private TurretBlueprint turretToBuild;
+    
     private void Awake()
     {
         instance = this;
@@ -25,22 +23,15 @@ public class BuildManager : MonoBehaviour
         
     }
 
-    public GameObject GetTurretToBuild()
+    public TurretBlueprint GetTurretToBuild()
     {
         return turretToBuild;
     }
+    public TurretBlueprint SetTurretToBuild(TurretBlueprint turret)
+    {
+        turretToBuild = turret;
+        return turretToBuild;
+    }
 
-    public void OnClickTurret()
-    {
-        Debug.Log("SELECT TURRET");
-        cost = 100;
-        turretToBuild = basicTurretPrefab;
-    }
-    public void OnClickAnotherTurret()
-    {
-        Debug.Log("SELECT ANOTHER TURRET");
-        cost = 250;
-        turretToBuild = AnotherTurretPrefab;
-    }
 
 }

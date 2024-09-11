@@ -8,6 +8,7 @@ public class TileController : MonoBehaviour
     MeshRenderer mesh;
     BuildManager bm;
     public Material hoverMaterial;
+    private TurretBlueprint turretBlueprint;
     private Material startMaterial;
     private GameObject turretObj;
     // Start is called before the first frame update
@@ -48,28 +49,18 @@ public class TileController : MonoBehaviour
             return;
         }
         if (turretObj != null) return;
-        if (bm.GetTurretToBuild() == null)
+
+        turretBlueprint = bm.GetTurretToBuild();
+        if (turretBlueprint == null)
         {
             Debug.Log("터렛을 설치하지 못했습니다.!!");
             return;
         };
 
-        if (CheckMoney(bm.cost) == false) return;
-        turretObj = Instantiate(bm.GetTurretToBuild(), transform.position, Quaternion.identity);
-        Debug.Log($"건설하고 남은돈: {PlayerStats.money}");
-    }
-
-    bool CheckMoney(int cost)
-    {
-        if (PlayerStats.money - cost >= 0)
+        if (PlayerStats.UseMoney(turretBlueprint.cost) == true)
         {
-            PlayerStats.money -= cost;
-            return true;
-        }
-        else
-        {
-            Debug.Log("돈이 부족합니다");
-            return false;
+            turretObj = Instantiate(turretBlueprint.turretPrefab, transform.position, Quaternion.identity);
+            Debug.Log($"건설하고 남은돈: {PlayerStats.Money}");
         }
     }
 }

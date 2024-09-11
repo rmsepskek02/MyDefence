@@ -26,23 +26,19 @@ namespace MyDefence
 
         #region Variables
         //타일에 설치할 터렛
-        private GameObject turretToBuild;
-
-        //기본 터렛 프리팹
-        public GameObject basicTurretPrefab;
-        //미사일 런처 프리팹
-        public GameObject missileLauncherPrefab;
+        private TurretBlueprint turretToBuild;
         #endregion
 
-        public GameObject GetTurretToBuild()
+        public TurretBlueprint GetTurretToBuild()
         {
             return turretToBuild;
         }
 
-        //매개변수로 받은 터렛 프리팹을 설치할 터렛에 저장
-        public void SetTurretToBuild(GameObject turretPrefab)
+        //매개변수로 받은 터렛 프리팹을 설치할 터렛에 저장        
+        public void SetTurretToBuild(TurretBlueprint turret)
         {
-            turretToBuild = turretPrefab;
+            turretToBuild = turret;
         }
+
     }
 }

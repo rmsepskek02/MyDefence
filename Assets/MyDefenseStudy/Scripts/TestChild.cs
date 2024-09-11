@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class TurretBlueprint
+public class TestChild : TurretBlueprint
 {
-    public GameObject turretPrefab;
-    public int cost;
+    public int damage;
 }
