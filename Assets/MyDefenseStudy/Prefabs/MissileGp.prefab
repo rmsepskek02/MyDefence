@@ -101,3 +101,5 @@ MonoBehaviour:
   target: {fileID: 0}
   bulletEffect: {fileID: 7980952484192967062, guid: 909ada5ce12510041b633cc67cf2eed3,
     type: 3}
+  atk: 50
+  enemyTag: Enemy

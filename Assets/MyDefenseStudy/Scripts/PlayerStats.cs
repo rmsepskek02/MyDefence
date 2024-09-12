@@ -41,6 +41,10 @@ public class PlayerStats : MonoBehaviour
         }
         return false;
     }
+    public static void AddMoney(int cost)
+    {
+        money += cost;
+    }
 
     public static void ReduceLife()
     {
@@ -48,7 +52,6 @@ public class PlayerStats : MonoBehaviour
         if(life <= 0)
         {
             life = 0;
-            Debug.Log("GAME OVER");
         }
     }
 }

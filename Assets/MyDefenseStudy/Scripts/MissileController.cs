@@ -50,7 +50,7 @@ public class MissileController : BulletController
         foreach (Collider obj in hitObj)
         {
             if (obj.gameObject.tag == enemyTag)
-                Destroy(obj.gameObject);
+                obj.gameObject.GetComponent<EnemyController>().hp -= atk;
         }
     }
 

@@ -119,10 +119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d02ab75d7513b4c9b147475519cae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 70
+  moveSpeed: 70
+  hitRange: 0.5
   target: {fileID: 0}
   bulletEffect: {fileID: 7980952484192967062, guid: 909ada5ce12510041b633cc67cf2eed3,
     type: 3}
+  atk: 50
 --- !u!54 &3448689639491237906
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     List<Vector3> wpVector;
     List<Transform> wpTr;
     public float moveSpeed = 2.0f;
+    public int hp;
     int wpIdx = 0;
     // Start is called before the first frame update
     void Start()
@@ -19,13 +20,18 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         TranslateObj(wpTr, wpIdx);
+        if (hp <= 0)
+        {
+            PlayerStats.AddMoney(50);
+            Destroy(gameObject);
+        }
     }
 
     // enemy 이동 알고리즘
     void TranslateObj(List<Transform> objTrList, int i)
     {
         // idx 값이 List의 index를 넘어가지 않도록
-        if (wpIdx >= objTrList.Count) wpIdx = objTrList.Count - 1; 
+        if (wpIdx >= objTrList.Count) wpIdx = objTrList.Count - 1;
 
         // WayPoint에 도착하지 않은 경우 WayPoint로 이동
         if (!ArePositionsSimilar(transform.position, objTrList[i].position, 0.5f))
@@ -36,7 +42,7 @@ public class EnemyController : MonoBehaviour
             wpIdx++;
 
         // 종점 도착
-        if(ArePositionsSimilar(transform.position, objTrList[objTrList.Count - 1].position, 0.5f))
+        if (ArePositionsSimilar(transform.position, objTrList[objTrList.Count - 1].position, 0.5f))
         {
             PlayerStats.ReduceLife();
             Destroy(this.gameObject);

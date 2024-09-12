@@ -8,6 +8,8 @@ public class BulletController : MonoBehaviour
     public float hitRange = 0.5f;
     public GameObject target;
     public GameObject bulletEffect;
+    public int atk;
+    EnemyController ec;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +69,9 @@ public class BulletController : MonoBehaviour
     }
     void OnDamaged(Transform target)
     {
-        Destroy(target.gameObject);
+        target.gameObject.GetComponent<EnemyController>().hp -= atk;
+        //Destroy(target.gameObject);
+        
     }
     // 기즈모 그리기
     void OnDrawGizmos()
