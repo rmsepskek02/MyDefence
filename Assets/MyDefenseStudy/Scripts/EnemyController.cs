@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     List<Transform> wpTr;
     public float moveSpeed = 2.0f;
     public int hp;
+    public GameObject destroyEffect;
     int wpIdx = 0;
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,9 @@ public class EnemyController : MonoBehaviour
         if (hp <= 0)
         {
             PlayerStats.AddMoney(50);
+            GameObject _destroyEffect = Instantiate(destroyEffect, transform.position, Quaternion.Euler(-90f, 0f, 0f));
+
+            Destroy(_destroyEffect, 2f);
             Destroy(gameObject);
         }
     }

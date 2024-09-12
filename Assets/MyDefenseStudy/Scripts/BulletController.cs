@@ -9,7 +9,6 @@ public class BulletController : MonoBehaviour
     public GameObject target;
     public GameObject bulletEffect;
     public int atk;
-    EnemyController ec;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,7 +69,6 @@ public class BulletController : MonoBehaviour
     void OnDamaged(Transform target)
     {
         target.gameObject.GetComponent<EnemyController>().hp -= atk;
-        //Destroy(target.gameObject);
         
     }
     // 기즈모 그리기

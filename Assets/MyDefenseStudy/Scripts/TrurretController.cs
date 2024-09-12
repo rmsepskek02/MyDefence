@@ -17,11 +17,15 @@ public class TrurretController : MonoBehaviour
     float shootTime = 0;
     float time = 0;
     GameObject closestObject = null;
-
+    int atk = 0;
+    TurretBlueprint turretBp;
+    BuildManager bm;
     // Start is called before the first frame update
     void Start()
     {
-
+        bm = BuildManager.instance;
+        turretBp = bm.GetTurretToBuild();
+        atk = turretBp.atk;
     }
 
     // Update is called once per frame
@@ -99,9 +103,11 @@ public class TrurretController : MonoBehaviour
         {
             // 총알 생성
             GameObject _bullet = Instantiate(bullet, firePoint.transform.position, firePoint.rotation);
+            BulletController bc = _bullet.GetComponent<BulletController>();
             
             // 총알의 타겟 설정
-            _bullet.GetComponent<BulletController>().target = target;
+            bc.target = target;
+            bc.atk = atk;
 
             shootTime = 0;
         }

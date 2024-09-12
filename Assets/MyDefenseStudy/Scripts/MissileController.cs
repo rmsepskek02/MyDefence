@@ -49,8 +49,10 @@ public class MissileController : BulletController
         Collider[] hitObj = Physics.OverlapSphere(transform.position, hitRange);
         foreach (Collider obj in hitObj)
         {
-            if (obj.gameObject.tag == enemyTag)
+            if (obj.gameObject.tag == enemyTag) 
+            {
                 obj.gameObject.GetComponent<EnemyController>().hp -= atk;
+            }
         }
     }
 
