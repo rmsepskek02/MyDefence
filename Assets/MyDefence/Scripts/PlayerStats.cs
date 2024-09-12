@@ -15,13 +15,20 @@ namespace MyDefence
         }
         //게임 시작시 지급하는 초기 소지금
         [SerializeField] private int startMoney = 400;
+
+        //라이프
+        private static int lives;
+        //라이프 읽기 전용 속성
+        public static int Lives => lives;
+        //게임 시작시 지급하는 초기 생명값
+        [SerializeField] private int startLives = 10;
         #endregion
 
         private void Start()
         {
             //초기화
             money = startMoney;
-            Debug.Log($"소지금 {money}를 지급하였습니다");
+            lives = startLives;
         }
 
         //돈을 번다
@@ -50,6 +57,22 @@ namespace MyDefence
             return money >= amount;
         }
 
+        //라이프 추가
+        public static void AddLives(int amount)
+        {
+            lives += amount;
+        }
+
+        //라이프 사용
+        public static void UseLives(int amount)
+        {
+            lives -= amount;
+
+            if (lives <= 0)
+            {
+                lives = 0;
+            }
+        }
 
     }
 }

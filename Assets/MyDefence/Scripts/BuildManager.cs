@@ -25,8 +25,24 @@ namespace MyDefence
         #endregion
 
         #region Variables
-        //타일에 설치할 터렛
+        //타일에 설치할 터렛의 정보(프리팹, 가격정보)
         private TurretBlueprint turretToBuild;
+
+        //선택한 터렛이 있는지, 선택하지 안했으면 건설 못한다
+        public bool CannotBuild => turretToBuild == null;
+
+
+        //선택한 터렛을 건설한 비용을 가지고 있는지
+        public bool HasBuildMoney
+        {
+            get
+            {
+                if (turretToBuild == null)
+                    return false;
+
+                return PlayerStats.HasMoney(turretToBuild.cost);
+            }
+        }
         #endregion
 
         public TurretBlueprint GetTurretToBuild()

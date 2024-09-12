@@ -910,6 +910,7 @@ GameObject:
   - component: {fileID: 466925447}
   - component: {fileID: 466925449}
   - component: {fileID: 466925448}
+  - component: {fileID: 466925450}
   m_Layer: 5
   m_Name: Gold
   m_TagString: Untagged
@@ -1034,6 +1035,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466925446}
   m_CullTransparentMesh: 1
+--- !u!114 &466925450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466925446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba78cede4a400e5428cbdcfd32866e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldText: {fileID: 466925448}
+  lifeText: {fileID: 829123597}
 --- !u!1001 &503279809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1759,10 +1774,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f4369e6c2858144b9878b4076b399a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldText: {fileID: 466925448}
-  lifeText: {fileID: 829123597}
   startMoney: 400
-  startLife: 1
+  startLife: 10
 --- !u!1001 &765420435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1942,6 +1955,7 @@ GameObject:
   - component: {fileID: 829123596}
   - component: {fileID: 829123598}
   - component: {fileID: 829123597}
+  - component: {fileID: 829123599}
   m_Layer: 5
   m_Name: Life
   m_TagString: Untagged
@@ -2066,6 +2080,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829123595}
   m_CullTransparentMesh: 1
+--- !u!114 &829123599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829123595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ddf62bd4afd22e4599df5940acd83e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeText: {fileID: 829123597}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

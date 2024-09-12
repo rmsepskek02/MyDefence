@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace MyDefence
 {
-    //Enemy¸¦ °ü¸®ÇÏ´Â Å¬·¡½º
+    //Enemyë¥¼ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤
     public class Enemy : MonoBehaviour
     {
-        //ÇÊµå
+        //í•„ë“œ
         #region Variable
-        private float speed = 5f;   //ÀÌµ¿ ¼Óµµ
-        private Transform target;   //ÀÌµ¿ÇÒ ¸ñÇ¥ÁöÁ¡        
+        private float speed = 5f;   //ì´ë™ ì†ë„
+        private Transform target;   //ì´ë™í•  ëª©í‘œì§€ì         
 
-        private int wayPointIndex = 0;  //wayPoints ¹è¿­À» °ü¸®ÇÏ´Â ÀÎµ¦½º
+        private int wayPointIndex = 0;  //wayPoints ë°°ì—´ì„ ê´€ë¦¬í•˜ëŠ” ì¸ë±ìŠ¤
 
         //private bool isPaid = false;
         //public Transform startPoint;
@@ -21,14 +21,14 @@ namespace MyDefence
         // Start is called before the first frame update
         void Start()
         {
-            //ÃÊ±âÈ­
+            //ì´ˆê¸°í™”
             //Debug.Log("Enemy start");
             //isPaid = false;
 
-            //À§Ä¡¸¦ ½ÃÀÛÁöÁ¡À¸·Î ÃÊ±âÈ­
+            //ìœ„ì¹˜ë¥¼ ì‹œì‘ì§€ì ìœ¼ë¡œ ì´ˆê¸°í™”
             //transform.position = startPoint.position;
 
-            //Ã¹¹øÂ° ¸ñÇ¥ÁöÁ¡ ¼ÂÆÃ
+            //ì²«ë²ˆì§¸ ëª©í‘œì§€ì  ì…‹íŒ…
             wayPointIndex = 0;
             target = WayPoints.points[wayPointIndex];
         }
@@ -41,11 +41,11 @@ namespace MyDefence
                 return;
             }*/
 
-            //ÀÌµ¿ :¹æÇâ(dir), Time.deltatiem, speed
+            //ì´ë™ :ë°©í–¥(dir), Time.deltatiem, speed
             Vector3 dir = target.position - this.transform.position;
             transform.Translate(dir.normalized * Time.deltaTime * speed);
 
-            //µµÂøÆÇÁ¤
+            //ë„ì°©íŒì •
             float distance = Vector3.Distance(transform.position, target.position);
             if(distance < 0.2f)
             {
@@ -53,23 +53,30 @@ namespace MyDefence
             }
         }
 
-        //´ÙÀ½ ¸ñÇ¥ ÁöÁ¡ ¼ÂÆÃ
+        //ë‹¤ìŒ ëª©í‘œ ì§€ì  ì…‹íŒ…
         void SetNextTarget()
         {
             if(wayPointIndex == WayPoints.points.Length - 1)
             {
-                //Debug.Log("Á¾Á¡ µµÂø");
-                //°ÔÀÓ ¿ÀºêÁ§Æ® kill
-                Destroy(this.gameObject);
-                //
-                //Debug.Log("°ú±İ");
-                //isPaid = true;
-
+                Arrive();
                 return;
             }
 
             wayPointIndex++;
             target = WayPoints.points[wayPointIndex];
+        }
+
+        //ëª©í‘œì§€ì  ë„ì°© ì²˜ë¦¬
+        void Arrive()
+        {
+            //Debug.Log("ì¢…ì  ë„ì°©");
+            PlayerStats.UseLives(1);
+
+            //ê²Œì„ ì˜¤ë¸Œì íŠ¸ kill
+            Destroy(this.gameObject);
+            //
+            //Debug.Log("ê³¼ê¸ˆ");
+            //isPaid = true;
         }
     }
 }

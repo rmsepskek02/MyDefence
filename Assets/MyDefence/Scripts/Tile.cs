@@ -22,14 +22,15 @@ namespace MyDefence
         //public Color hoverColor;
         //맵타일의 기본 Color
         //private Color startColor;
+        public Color notEnoughColor;
 
         //마우스가 위에 있을때 타일 메터리얼
         public Material hoverMaterial;
         //맵타일의 기본 Material
         private Material startMaterial;
 
-        //터렛프리팹
-        public GameObject turretPrefab;
+        //터렛 건설 이펙트 프리팹
+        public GameObject buildEffectPrefab;
 
         //터렛 설치 위치 보정값
         public Vector3 offset;
@@ -56,7 +57,7 @@ namespace MyDefence
             }
 
             //터렛을 선택하지 않으면
-            if (buildManager.GetTurretToBuild() == null)
+            if (buildManager.CannotBuild)
             {
                 return;
             }
@@ -64,6 +65,12 @@ namespace MyDefence
             rend.enabled = true;
             //rend.material.color = hoverColor;
             rend.material = hoverMaterial;
+
+            //선택한 터렛을 건설한 비용을 가지고 있는지 잔고확인
+            if (buildManager.HasBuildMoney == false)
+            {
+                rend.material.color = notEnoughColor;
+            }
         }
 
         private void OnMouseDown()
@@ -80,21 +87,25 @@ namespace MyDefence
                 return;
             }
 
-            blueprint = buildManager.GetTurretToBuild();
-
-            if (blueprint == null)
+            if (buildManager.CannotBuild)
             {
                 Debug.Log("터렛을 설치하지 못했습니다"); //터렛을 선택하지 않은 상태
                 return;
             }
 
-            //돈을 지불한다 100, 250
-            Debug.Log($"터렛 건설비용: {blueprint.cost}");
-            if(PlayerStats.UseMoney(blueprint.cost))
-            {   
-                turret = Instantiate(blueprint.turretPrefab, this.transform.position + offset, Quaternion.identity);
+            blueprint = buildManager.GetTurretToBuild();
 
-                Debug.Log($"건설하고 남은돈: {PlayerStats.Money}");
+            //돈을 지불한다 100, 250
+            //Debug.Log($"터렛 건설비용: {blueprint.cost}");
+            if(PlayerStats.UseMoney(blueprint.cost))
+            {
+                //터렛 건설 이펙트
+                GameObject effectGo = Instantiate(buildEffectPrefab, this.transform.position + offset, Quaternion.identity);
+                Destroy(effectGo, 2f);
+
+                //터렛 건설
+                turret = Instantiate(blueprint.turretPrefab, this.transform.position + offset, Quaternion.identity);
+                //Debug.Log($"건설하고 남은돈: {PlayerStats.Money}");
             }
         }
 

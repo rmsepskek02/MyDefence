@@ -5,9 +5,6 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     #region
-    public TextMeshProUGUI goldText;
-    public TextMeshProUGUI lifeText;
-
     private static int money;
     public static int Money
     {
@@ -32,8 +29,7 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        goldText.text = $"{money} G";
-        lifeText.text = $"Life : {life}";
+        
     }
 
     public static bool UseMoney(int cost)
@@ -49,8 +45,9 @@ public class PlayerStats : MonoBehaviour
     public static void ReduceLife()
     {
         life--;
-        if(life == 0)
+        if(life <= 0)
         {
+            life = 0;
             Debug.Log("GAME OVER");
         }
     }

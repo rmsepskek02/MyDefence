@@ -118,7 +118,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cb091cb105a0294ca3826e58d63c228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notEnoughColor: {r: 1, g: 0, b: 0, a: 1}
   hoverMaterial: {fileID: 2100000, guid: 9df03b3e503b0ed47911f014e1daf401, type: 2}
   turretPrefab: {fileID: 2637020385187907096, guid: e82ec556c15e9c94fafce5dce5a5bbd7,
+    type: 3}
+  buildEffectPrefab: {fileID: 3771260771338358989, guid: ca81f7a64736cab42abbe4ab05415e7a,
     type: 3}
   offset: {x: 0, y: 0.05, z: 0}
