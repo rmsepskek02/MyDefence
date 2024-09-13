@@ -48,6 +48,7 @@ MonoBehaviour:
   moveSpeed: 50
   bulletImpactPrefab: {fileID: 6991808442650881032, guid: 6503b575c06bc0e4ba2a973eee88a8ec,
     type: 3}
+  startAttack: 50
   damageRange: 3.5
   enemyTag: Enemy
 --- !u!1 &4594253762830393765

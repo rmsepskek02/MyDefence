@@ -29,7 +29,7 @@ public class TrurretController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         time += Time.deltaTime;
         closestObject = CheckMinDistance(enemyList);
@@ -93,7 +93,7 @@ public class TrurretController : MonoBehaviour
     }
 
     // 총알 발사
-    void ShootBullet(GameObject target)
+    protected virtual void ShootBullet(GameObject target)
     {
         if (target == null) return;
 

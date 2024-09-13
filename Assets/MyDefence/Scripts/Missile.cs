@@ -34,7 +34,8 @@ namespace MyDefence
             Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, damageRange);
             foreach (var collider in hitColliders)
             {
-                if(collider.tag == enemyTag)
+                IDamageable damageable = collider.GetComponent<IDamageable>();
+                if (damageable != null)
                 {
                     Damage(collider.transform);
                 }

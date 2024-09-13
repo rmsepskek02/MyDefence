@@ -16,11 +16,21 @@ namespace MyDefence
 
         //impact 이펙트
         public GameObject bulletImpactPrefab;
+
+        //bullet 공격력
+        private float attack;
+        [SerializeField] private float startAttack = 50f;
         #endregion
 
         public void SetTarget(Transform target)
         {
             this.target = target;
+        }
+
+        private void Start()
+        {
+            //초기화
+            attack = startAttack;
         }
 
         // Update is called once per frame
@@ -63,8 +73,17 @@ namespace MyDefence
 
         protected void Damage(Transform target)
         {
-            //kill(Destroy)
-            Destroy(target.gameObject);
+            //attack(50) 만큼 타겟에게 데미지를 준다
+            /*Enemy enemy = target.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(attack);
+            }*/
+            IDamageable damageable = target.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(attack);
+            }
         }
     }
 }

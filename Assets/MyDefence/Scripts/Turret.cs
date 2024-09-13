@@ -9,21 +9,21 @@ namespace MyDefence
     {
         //필드
         #region Variable
-        private Transform target;       //타겟
+        protected Transform target;       //타겟
         public Transform partToRotate;  //터렛 회전을 관리하는 오브젝트
 
         public float attackRange = 7f;  //공격 범위
 
         //target 찾기 타이머
         public float serachTimer = 0.5f;
-        private float countdown = 0f;
+        protected float countdown = 0f;
 
         //회전
         public float turnSpeed = 10f;
 
         //슛 타이머
         public float shootTimer = 1f;
-        private float shootCountdown = 0f;
+        protected float shootCountdown = 0f;
 
         //발사
         public GameObject bulletPrefab;
@@ -69,7 +69,7 @@ namespace MyDefence
         }
 
         //슛 처리
-        void Shoot()
+        protected void Shoot()
         {
             //Debug.Log("Shoot!!!!!!!");
             //총구(Fire Point) 위치에 탄환 객체 생성(Instiate)하기
@@ -79,7 +79,7 @@ namespace MyDefence
         }
 
         //타겟을 향해 총구를 회전
-        void LockOn()
+        protected void LockOn()
         {
             Vector3 dir = target.position - partToRotate.position;
             Quaternion lookRotation = Quaternion.LookRotation(dir);
@@ -88,7 +88,7 @@ namespace MyDefence
         }
 
         //적들중 공격할 target 적을 찾는다
-        void UpdateTarget()
+        protected void UpdateTarget()
         {
             //Debug.Log("UpdateTarget=======");
             //"Enemy" 태그를 가진 오브젝트들 객체 가져오기

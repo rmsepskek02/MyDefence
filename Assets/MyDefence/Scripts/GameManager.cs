@@ -8,6 +8,9 @@ namespace MyDefence
         #region Variables
         //게임오버 체크
         private bool isGameOver = false;
+
+        //치팅 체크
+        private bool isCheating = true;
         #endregion
 
         // Update is called once per frame
@@ -24,6 +27,33 @@ namespace MyDefence
                 Debug.Log("Game Over");
                 isGameOver = true;
             }
+
+            //치팅
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                ShowMeTheMoney();
+            }
         }
+
+        //머니 치팅 - 10만 골드 지급
+        void ShowMeTheMoney()
+        {
+            if (isCheating == false)
+                return;
+
+            PlayerStats.AddMoney(100000);
+        }
+
+        //레벨업 치팅 - 100
+        void Levelup100()
+        {
+            if (isCheating == false)
+                return;
+
+            //level += 100;
+        }
+
+        //....
+
     }
 }

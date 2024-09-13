@@ -25,7 +25,7 @@ public class BulletController : MonoBehaviour
     }
 
     // 타겟으로 이동
-    public void MoveToTarget(GameObject _target)
+    protected virtual void MoveToTarget(GameObject _target)
     {
         // 타겟으로 방향
         Vector3 dir = _target.transform.position - transform.position;
@@ -68,8 +68,9 @@ public class BulletController : MonoBehaviour
     }
     void OnDamaged(Transform target)
     {
-        target.gameObject.GetComponent<EnemyController>().hp -= atk;
-        
+        Damagable damagable = target.gameObject.GetComponent<Damagable>();
+        if (damagable != null)
+            damagable.TakeDamage(atk);
     }
     // 기즈모 그리기
     void OnDrawGizmos()

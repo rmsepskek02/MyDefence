@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace MyDefence
 {
-    //Enemy를 관리하는 클래스
-    public class Enemy : MonoBehaviour, IDamageable
+    public class Mop : Damageable
     {
         //필드
         #region Variable
@@ -23,13 +19,13 @@ namespace MyDefence
         #endregion
 
         private void Start()
-        {   
+        {
             //초기화
             health = startHealth;
         }
 
         //데미지 처리
-        public void TakeDamage(float damage)
+        public override void TakeDamage(float damage)
         {
             health -= damage;
             Debug.Log($"health: {health}");
@@ -53,6 +49,5 @@ namespace MyDefence
             //kill
             Destroy(gameObject);
         }
-
     }
 }
