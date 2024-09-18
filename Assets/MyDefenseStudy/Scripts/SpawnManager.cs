@@ -9,10 +9,10 @@ public class SpawnManager : MonoBehaviour
     public GameObject startPoint;
     public TextMeshProUGUI timerText;
     Vector3 spawnPoint = new Vector3();
-    public float timerTime = 5f;   // Å¸ÀÌ¸Ó ½Ã°£
-    float roundDelay = 5f;  // ¶ó¿îµå µô·¹ÀÌ ½Ã°£
-    float spawnDelay = 1f;  // ½ºÆù µô·¹ÀÌ ½Ã°£
-    int spawnCount = 1;     // Ã¹ ½ºÆù °³Ã¼ ¼ö
+    public float timerTime = 5f;   // íƒ€ì´ë¨¸ ì‹œê°„
+    float roundDelay = 5f;  // ë¼ìš´ë“œ ë”œë ˆì´ ì‹œê°„
+    float spawnDelay = 1f;  // ìŠ¤í° ë”œë ˆì´ ì‹œê°„
+    int spawnCount = 1;     // ì²« ìŠ¤í° ê°œì²´ ìˆ˜
     // Start is called before the first frame update
     void Start()
     {
@@ -26,48 +26,51 @@ public class SpawnManager : MonoBehaviour
 
     }
 
-    // Å¸ÀÌ¸Ó ÄÚ·çÆ¾
+    // íƒ€ì´ë¨¸ ì½”ë£¨í‹´
     IEnumerator CheckTimer(float _time)
     {
-        // Å¸ÀÌ¸Ó ½Ã°£ ¼³Á¤
+        // íƒ€ì´ë¨¸ ì‹œê°„ ì„¤ì •
         float timer = _time;
-        // timer ÃÊ±âÈ­
+        // timer ì´ˆê¸°í™”
         float time = 0f;
 
         while (time < timer)
         {
-            // °æ°úµÈ ½Ã°£À» ´©Àû
+            // ê²½ê³¼ëœ ì‹œê°„ì„ ëˆ„ì 
             time += Time.deltaTime;
-            // UI ¾÷µ¥ÀÌÆ®
+            // UI ì—…ë°ì´íŠ¸
             timerText.text = Mathf.RoundToInt(timer - time).ToString();
             yield return null;
         }
     }
 
-    // ½ºÆù µô·¹ÀÌ ÄÚ·çÆ¾
+    // ìŠ¤í° ë”œë ˆì´ ì½”ë£¨í‹´
     IEnumerator DelayForSpawn(float _spawndelay, int _spawncount)
     {
         for (var i = 0; i < _spawncount; i++)
         {
-            // Enemy »ı¼º
-            Instantiate(enemyObj, spawnPoint, Quaternion.identity);
-            // ½ºÆù µô·¹ÀÌ
+            // Enemy ìƒì„±
+            GameObject go = Instantiate(enemyObj, spawnPoint, Quaternion.identity);
+
+            int num = Random.Range(0, 1000);
+            go.name = go.name + num;
+            // ìŠ¤í° ë”œë ˆì´
             yield return new WaitForSeconds(_spawndelay);
         }
-        // ¶ó¿îµå µô·¹ÀÌ ÄÚ·çÆ¾
+        // ë¼ìš´ë“œ ë”œë ˆì´ ì½”ë£¨í‹´
         StartCoroutine(DelayForRound(roundDelay, timerTime));
     }
 
-    // ¶ó¿îµå µô·¹ÀÌ ÄÚ·çÆ¾
+    // ë¼ìš´ë“œ ë”œë ˆì´ ì½”ë£¨í‹´
     IEnumerator DelayForRound(float _roundDelay, float _timerTime)
     {
-        // Å¸ÀÌ¸Ó ÄÚ·çÆ¾
+        // íƒ€ì´ë¨¸ ì½”ë£¨í‹´
         StartCoroutine(CheckTimer(_timerTime));
-        // ¶ó¿îµå µô·¹ÀÌ
+        // ë¼ìš´ë“œ ë”œë ˆì´
         yield return new WaitForSeconds(_roundDelay);
-        // °³Ã¤ »ı¼º ¼ö Áõ°¡
+        // ê°œì±„ ìƒì„± ìˆ˜ ì¦ê°€
         spawnCount++;
-        // ´ÙÀ½ ¶ó¿îµå ½ÃÀÛ, ½ºÆù µô·¹ÀÌ ÄÚ·çÆ¾
+        // ë‹¤ìŒ ë¼ìš´ë“œ ì‹œì‘, ìŠ¤í° ë”œë ˆì´ ì½”ë£¨í‹´
         StartCoroutine(DelayForSpawn(spawnDelay, spawnCount));
     }
 }

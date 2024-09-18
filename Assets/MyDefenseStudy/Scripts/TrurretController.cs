@@ -17,7 +17,7 @@ public class TrurretController : MonoBehaviour
     float shootTime = 0;
     float time = 0;
     GameObject closestObject = null;
-    int atk = 0;
+    public int atk = 0;
     TurretBlueprint turretBp;
     BuildManager bm;
     // Start is called before the first frame update
@@ -80,7 +80,12 @@ public class TrurretController : MonoBehaviour
     // 오브젝트 목표물을 바라보며 회전하기
     void TurnObject(GameObject target)
     {
-        if (target == null) return;
+        GameObject go = target;
+        if (target == null) 
+        {
+            ShootBullet(go);
+            return;
+        }
 
         // 타겟의 위치에서 현재 위치까지의 방향 벡터를 계산
         Vector3 direction = target.transform.position - partToRotate.transform.position;

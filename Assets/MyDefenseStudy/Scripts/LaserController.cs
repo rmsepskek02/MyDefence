@@ -11,7 +11,7 @@ public class LaserController : BulletController
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-
+        
         // 선의 너비 설정 (시작, 끝 너비)
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;

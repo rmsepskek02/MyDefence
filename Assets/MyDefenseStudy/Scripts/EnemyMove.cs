@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMove : MonoBehaviour
+public class EnemyMove : Slowable
 {
     List<Vector3> wpVector;
     List<Transform> wpTr;
@@ -46,5 +46,10 @@ public class EnemyMove : MonoBehaviour
     bool ArePositionsSimilar(Vector3 posA, Vector3 posB, float tolerance)
     {
         return Vector3.Distance(posA, posB) <= tolerance;
+    }
+
+    public override void Slow(float slow)
+    {
+        moveSpeed *= slow;
     }
 }
