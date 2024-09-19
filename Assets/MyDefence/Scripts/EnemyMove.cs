@@ -7,7 +7,7 @@ namespace MyDefence
     {
         //필드
         #region Variable
-        private float speed;   //이동 속도
+        [SerializeField] private float speed;   //이동 속도
         [SerializeField] private float startSpeed = 3f; //이동 시작 속도
 
         private Transform target;   //이동할 목표지점        
@@ -29,6 +29,9 @@ namespace MyDefence
         private void Update()
         {
             Move();
+
+            //속도 복원
+            speed = startSpeed;
         }
 
         //이동
@@ -70,6 +73,11 @@ namespace MyDefence
             //
             //Debug.Log("과금");
             //isPaid = true;
+        }
+
+        public void Slow(float rate)
+        {
+            speed = startSpeed * (1.0f - rate);
         }
 
     }

@@ -32,7 +32,7 @@ namespace MyDefence
         public void TakeDamage(float damage)
         {
             health -= damage;
-            Debug.Log($"health: {health}");
+            //Debug.Log($"health: {health}");
 
             if (health <= 0)
             {

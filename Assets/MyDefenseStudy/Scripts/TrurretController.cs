@@ -45,7 +45,7 @@ public class TrurretController : MonoBehaviour
     // 가장 가까운 오브젝트 찾기
     GameObject CheckMinDistance(GameObject[] goList)
     {
-        if (time > 0.5f)
+        if (time > 2.5f)
         {
             enemyList = FindEnemy();
             time = 0;

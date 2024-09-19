@@ -1,25 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletTest : MonoBehaviour
+namespace Sample
 {
-    public Rigidbody rb;
-    public float force = 70.0f;
-    // Start is called before the first frame update
-    void Start()
+    public class BulletTest : MonoBehaviour
     {
-    }
+        #region Variables
+        public Rigidbody rb;
+        [SerializeField] private float force = 70f;
+        #endregion
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        //앞으로 이동
+        public void MoveForward()
+        {
+            Debug.Log("앞으로 이동한다");
+            //transform.Translate(transform.forward * Time.deltaTime * 50f, Space.World);
+        }
 
-    public void MoveForward()
-    {
-        Vector3 localForce = transform.TransformDirection(Vector3.forward);
-        rb.AddForce(localForce * force, ForceMode.Impulse);
+        //앞방향으로 힘을 준다
+        public void MoveByForce()
+        {
+            rb.AddForce(transform.forward * force, ForceMode.Impulse);
+        }
     }
 }

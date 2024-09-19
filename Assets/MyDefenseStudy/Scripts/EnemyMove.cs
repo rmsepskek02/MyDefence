@@ -6,7 +6,7 @@ public class EnemyMove : Slowable
 {
     List<Vector3> wpVector;
     List<Transform> wpTr;
-    public float moveSpeed = 2.0f;
+    public float moveSpeed = 3.0f;
     float startSpeed;
     int wpIdx = 0;
     // Start is called before the first frame update
