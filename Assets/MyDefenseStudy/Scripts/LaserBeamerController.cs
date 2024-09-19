@@ -7,14 +7,15 @@ public class LaserBeamerController : TrurretController
     private LineRenderer lineRenderer;
     GameObject tempGo;
     public float slow;
-    public bool isSlow;
+    public ParticleSystem laserEffect;
+    public Light laserLight;
     float atkTime = 0;
     // Start is called before the first frame update
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
         atk = 30;
-        slow = 0.6f;
+        slow = 0.4f;
         atkTime = 0;
         // 선의 너비 설정 (시작, 끝 너비)
         lineRenderer.startWidth = 0.1f;
@@ -31,37 +32,41 @@ public class LaserBeamerController : TrurretController
     {
         if (target == null)
         {
-            lineRenderer.positionCount = 0;
+            if (lineRenderer.enabled == true)
+            {
+                lineRenderer.enabled = false;
+                laserLight.enabled = false;
+                laserEffect.Pause();
+            }
             return;
         }
-        // 타겟이 바뀌었는지 체크 (현재 타겟과 tempGo 비교)
-        if (tempGo != target)
+        if (lineRenderer.enabled == false)
         {
-            Debug.Log("Target changed = " + target.gameObject.name);
-            tempGo = target;  // 새로운 타겟 저장
-            isSlow = false;   // 타겟이 바뀌었으므로 상태 초기화
+            lineRenderer.enabled = true;
+            laserLight.enabled = true;
+            laserEffect.Play();
         }
+        
         lineRenderer.positionCount = 2;
         lineRenderer.SetPosition(0, firePoint.transform.position);  // 첫 번째 점
         lineRenderer.SetPosition(1, target.transform.position);  // 두 번째 점
+        SphereCollider sc = target.GetComponent<SphereCollider>();
+        float radius = sc.radius;
+        Vector3 laserDir = (transform.position - target.transform.position).normalized;
+        laserEffect.transform.position = target.transform.position + laserDir * radius;
+        laserEffect.gameObject.transform.LookAt(gameObject.transform);
+
         atkTime += Time.deltaTime;
         Damagable damagable = target.gameObject.GetComponent<Damagable>();
-        if (atkTime >= 1.0f)
+        if (damagable != null)
         {
-            if (damagable != null)
-            {
-                damagable.TakeDamage(atk);
-                Debug.Log("isSlow = " + isSlow);
-                atkTime = 0;
-            }
+            damagable.TakeDamage(atk * atkTime);
+            atkTime = 0;
         }
 
-        if (isSlow == true) return;
         Slowable slowable = target.gameObject.GetComponent<Slowable>();
-        isSlow = true;
         if (slowable != null)
         {
-            Debug.Log("SLOWABLE");
             slowable.Slow(slow);
         }
     }

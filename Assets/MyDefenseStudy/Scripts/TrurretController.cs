@@ -80,10 +80,8 @@ public class TrurretController : MonoBehaviour
     // 오브젝트 목표물을 바라보며 회전하기
     void TurnObject(GameObject target)
     {
-        GameObject go = target;
         if (target == null) 
         {
-            ShootBullet(go);
             return;
         }
 

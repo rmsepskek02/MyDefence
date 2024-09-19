@@ -7,18 +7,21 @@ public class EnemyMove : Slowable
     List<Vector3> wpVector;
     List<Transform> wpTr;
     public float moveSpeed = 2.0f;
+    float startSpeed;
     int wpIdx = 0;
     // Start is called before the first frame update
     void Start()
     {
         wpVector = WayPointController.wayVectors;
         wpTr = WayPointController.trList;
+        startSpeed = moveSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
         TranslateObj(wpTr, wpIdx);
+        Slow(0);
     }
     // enemy 이동 알고리즘
     void TranslateObj(List<Transform> objTrList, int i)
@@ -50,6 +53,6 @@ public class EnemyMove : Slowable
 
     public override void Slow(float slow)
     {
-        moveSpeed *= slow;
+        moveSpeed = startSpeed * (1-slow);
     }
 }

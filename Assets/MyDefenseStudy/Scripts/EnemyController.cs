@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemyController : Damagable
 {
     public GameObject destroyEffect;
-    [SerializeField] private int hp;
-    public int startHp;
+    [SerializeField] private float hp;
+    public float startHp;
     [SerializeField] 
     private int rewardGold;
     // Start is called before the first frame update
@@ -20,7 +20,7 @@ public class EnemyController : Damagable
         Die();
     }
 
-    public void TakeDamaged(int damage)
+    public void TakeDamaged(float damage)
     {
         hp -= damage;
     }
@@ -36,7 +36,7 @@ public class EnemyController : Damagable
         }
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(float damage)
     {
         hp -= damage;
     }
