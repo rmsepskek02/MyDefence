@@ -40,4 +40,8 @@ public class EnemyController : Damagable
     {
         hp -= damage;
     }
+    private void OnDestroy()
+    {
+        PlayerStats.DecreaseWave();
+    }
 }

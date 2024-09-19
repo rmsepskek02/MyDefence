@@ -70,6 +70,8 @@ public class SpawnManager : MonoBehaviour
         yield return new WaitForSeconds(_roundDelay);
         // 개채 생성 수 증가
         spawnCount++;
+        PlayerStats.IncreaseRound();
+        PlayerStats.SetWave(spawnCount);
         // 다음 라운드 시작, 스폰 딜레이 코루틴
         StartCoroutine(DelayForSpawn(spawnDelay, spawnCount));
     }
