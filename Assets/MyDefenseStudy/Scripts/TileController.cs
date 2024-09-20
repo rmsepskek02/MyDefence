@@ -9,6 +9,7 @@ public class TileController : MonoBehaviour
     BuildManager bm;
     public Material hoverMaterial;
     public GameObject createEffect;
+    
     private TurretBlueprint turretBlueprint;
     private Material startMaterial;
     private GameObject turretObj;
@@ -60,7 +61,31 @@ public class TileController : MonoBehaviour
             Debug.Log("UI 요소 위를 클릭했습니다.");
             return;
         }
-        if (turretObj != null) return;
+        if (turretObj != null)
+        {
+            // 켜져있음
+            if (TileUI.tileUI.activeSelf)
+            {
+                // 다른타일임
+                if (TileUI.mapTile != gameObject)
+                {
+                    TileUI.tileUI.transform.position = transform.position + new Vector3(0, 2f, 1f);
+                }
+                // 같은타일임
+                else
+                {
+                    TileUI.tileUI.SetActive(false);
+                }
+            }
+            // 꺼져있음
+            else
+            {
+                TileUI.tileUI.SetActive(true);
+                TileUI.tileUI.transform.position = transform.position + new Vector3(0, 2f, 1f);
+            }
+            
+            return;
+        }
 
         turretBlueprint = bm.GetTurretToBuild();
         if (turretBlueprint == null)

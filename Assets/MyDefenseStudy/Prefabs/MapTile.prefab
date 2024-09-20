@@ -121,3 +121,4 @@ MonoBehaviour:
   hoverMaterial: {fileID: 2100000, guid: 271474585dcdfb54886e8580f40774cc, type: 2}
   createEffect: {fileID: 6703201137653538668, guid: 52986252a91103748b3dfe50e6389f14,
     type: 3}
+  tileUI: {fileID: 9209730301906791135, guid: 3a098658c3725804fa847cd803871f3e, type: 3}
