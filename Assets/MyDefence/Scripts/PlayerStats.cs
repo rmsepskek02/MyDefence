@@ -22,6 +22,14 @@ namespace MyDefence
         public static int Lives => lives;
         //게임 시작시 지급하는 초기 생명값
         [SerializeField] private int startLives = 10;
+
+        //라운드
+        private static int rounds;
+        public static int Rounds
+        {
+            get { return rounds; }
+            set { rounds = value; }
+        }
         #endregion
 
         private void Start()
@@ -29,6 +37,7 @@ namespace MyDefence
             //초기화
             money = startMoney;
             lives = startLives;
+            rounds = 0;
         }
 
         //돈을 번다

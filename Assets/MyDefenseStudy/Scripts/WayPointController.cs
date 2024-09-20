@@ -5,11 +5,13 @@ using UnityEngine;
 public class WayPointController : MonoBehaviour
 {
     public GameObject startPoint;
-    public static List<Vector3> wayVectors;
+    public static List<Vector3> wayVectors = new List<Vector3>();
     public static List<Transform> trList = new List<Transform>();
     // Start is called before the first frame update
     void Start()
     {
+        wayVectors.Clear();
+        trList.Clear();
         wayVectors = CreateVectors();
         trList = CreateListWayPoint();
     }
@@ -20,7 +22,7 @@ public class WayPointController : MonoBehaviour
         
     }
 
-    // enemy ÀÌµ¿ °æ·Î º¤ÅÍ List
+    // enemy ì´ë™ ê²½ë¡œ ë²¡í„° List
     List<Vector3> CreateVectors()
     {
         List<Vector3> vtList = new List<Vector3>();
@@ -39,7 +41,7 @@ public class WayPointController : MonoBehaviour
         return vtList;
     }
 
-    // ÀÚ½Ä¿ÀºêÁ§Æ®µéÀÇ Transform List¸¦ ¹İÈ¯
+    // ìì‹ì˜¤ë¸Œì íŠ¸ë“¤ì˜ Transform Listë¥¼ ë°˜í™˜
     List<Transform> CreateListWayPoint()
     {
         for (var i = 0; i < transform.childCount; i++)

@@ -7,11 +7,21 @@ namespace MyDefence
     {
         #region Variables
         //게임오버 체크
-        private bool isGameOver = false;
+        private static bool isGameOver = false;
+        public static bool IsGameOver => isGameOver;
+
+        //게임오버 UI
+        public GameObject gameoverUI;
 
         //치팅 체크
         private bool isCheating = true;
         #endregion
+
+        private void Start()
+        {
+            //초기화
+            isGameOver = false;
+        }
 
         // Update is called once per frame
         void Update()
@@ -24,8 +34,7 @@ namespace MyDefence
             //게임 오버 체크
             if(PlayerStats.Lives <= 0)
             {
-                Debug.Log("Game Over");
-                isGameOver = true;
+                GameOver();
             }
 
             //치팅
@@ -33,6 +42,19 @@ namespace MyDefence
             {
                 ShowMeTheMoney();
             }
+            if (Input.GetKeyDown(KeyCode.O) && isCheating)
+            {
+                GameOver();
+            }
+        }
+
+        void GameOver()
+        {
+            isGameOver = true;
+            //UI창 활성화
+            gameoverUI.SetActive(true);
+
+            //벌..
         }
 
         //머니 치팅 - 10만 골드 지급

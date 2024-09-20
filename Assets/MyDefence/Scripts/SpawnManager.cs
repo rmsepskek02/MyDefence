@@ -85,6 +85,7 @@ namespace MyDefence
             isSpawn = true;
 
             waveCount++;
+            PlayerStats.Rounds++;
             //Debug.Log($"waveCount: {waveCount}");
 
             for (int i = 0; i < waveCount; i++)

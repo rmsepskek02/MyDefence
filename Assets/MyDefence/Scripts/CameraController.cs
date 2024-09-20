@@ -27,6 +27,9 @@ namespace MyDefence
         // Update is called once per frame
         void Update()
         {
+            if (GameManager.IsGameOver)
+                return;
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 isCannotMove = !isCannotMove;
