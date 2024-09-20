@@ -8506,7 +8506,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4747253494203165213}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1196837133826078166}
+        m_TargetAssemblyTypeName: TileUI, Assembly-CSharp
+        m_MethodName: OnClickUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!223 &5823330363182475720
 Canvas:
   m_ObjectHideFlags: 0
@@ -8573,7 +8585,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1116499598508788731}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1196837133826078166}
+        m_TargetAssemblyTypeName: TileUI, Assembly-CSharp
+        m_MethodName: OnClickSell
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5950684879930252488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8938,6 +8962,7 @@ GameObject:
   - component: {fileID: 5950684879930252488}
   - component: {fileID: 834800447368807687}
   - component: {fileID: 1196837133826078166}
+  - component: {fileID: 9219930072801895319}
   m_Layer: 5
   m_Name: TileUI
   m_TagString: Untagged
@@ -8965,6 +8990,27 @@ RectTransform:
   m_AnchoredPosition: {x: 335.5, y: 180}
   m_SizeDelta: {x: 671, y: 360}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &9219930072801895319
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209730301781717788}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b5ba92aee41d3ab45b563208085c144f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

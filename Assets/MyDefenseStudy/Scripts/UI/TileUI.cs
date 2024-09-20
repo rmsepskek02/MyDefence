@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TileUI : MonoBehaviour
 {
+    public static TileUI Instance;
     public Button upgradeButton;
     public Button sellButton;
     public static GameObject tileUI;

@@ -71,7 +71,7 @@ public class CameraController : MonoBehaviour
 
     void EnableCamera()
     {
-        //isMove = false;
+        isMove = false;
         //if (Input.GetKeyDown(KeyCode.Escape))
         //    isMove = !isMove;
     }
