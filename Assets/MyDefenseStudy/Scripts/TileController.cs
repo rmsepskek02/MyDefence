@@ -13,7 +13,6 @@ public class TileController : MonoBehaviour
     private TurretBlueprint turretBlueprint;
     private Material startMaterial;
     private GameObject turretObj;
-    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -69,12 +68,12 @@ public class TileController : MonoBehaviour
             // 켜져있음
             if (TileUI.tileUI.activeSelf)
             {
-                //animator = TileUI.Instance.gameObject.GetComponent<Animator>();
                 // 다른타일임
                 if (TileUI.mapTile != gameObject)
                 {
+                    TileUI.instance.animator.Rebind();
+                    TileUI.instance.animator.Play("TileUIAnim");
                     TileUI.tileUI.transform.position = transform.position + new Vector3(0, 2f, 1f);
-                    animator.Play("TileUIAnim");
                     TileUI.mapTile = gameObject;
                 }
                 // 같은타일임
@@ -87,8 +86,6 @@ public class TileController : MonoBehaviour
             else
             {
                 TileUI.tileUI.SetActive(true);
-                //animator = TileUI.Instance.gameObject.GetComponent<Animator>();
-                animator.Play("TileUIAnim");
                 TileUI.tileUI.transform.position = transform.position + new Vector3(0, 2f, 1f);
                 TileUI.mapTile = gameObject;
             }

@@ -32,6 +32,4 @@ public class BuildManager : MonoBehaviour
         turretToBuild = turret;
         return turretToBuild;
     }
-
-
 }

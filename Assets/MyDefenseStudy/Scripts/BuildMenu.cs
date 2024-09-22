@@ -9,6 +9,7 @@ public class BuildMenu : MonoBehaviour
     public TurretBlueprint basicTurret;
     public TurretBlueprint missileLauncher;
     public TurretBlueprint LaserBeamer;
+    public TurretBlueprint UpgradeBasicTurret;
     public TextMeshProUGUI basicTurretGold;
     public TextMeshProUGUI missileLauncherGold;
     public TextMeshProUGUI LaserBeamerGold;

@@ -7850,6 +7850,11 @@ MonoBehaviour:
       type: 3}
     cost: 350
     atk: 0
+  UpgradeBasicTurret:
+    turretPrefab: {fileID: 8415123976835130049, guid: bac23290ed0446242ba4f7f37cca18a1,
+      type: 3}
+    cost: 0
+    atk: 60
   basicTurretGold: {fileID: 2053214132}
   missileLauncherGold: {fileID: 1982493995}
   LaserBeamerGold: {fileID: 937097588}
@@ -8311,6 +8316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeButton: {fileID: 5185136159432967136}
   sellButton: {fileID: 5945820441306596578}
+  animator: {fileID: 0}
+  testobj:
+    turretPrefab: {fileID: 8415123976835130049, guid: bac23290ed0446242ba4f7f37cca18a1,
+      type: 3}
+    cost: 0
+    atk: 0
 --- !u!1 &1843360213308659997
 GameObject:
   m_ObjectHideFlags: 0

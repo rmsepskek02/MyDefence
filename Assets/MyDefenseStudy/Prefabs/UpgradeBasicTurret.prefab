@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 7509301948920955701}
   - component: {fileID: 1790221887726447586}
   m_Layer: 0
-  m_Name: Turret2
+  m_Name: UpgradeBasicTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +260,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: -5}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7343336861391384028}
@@ -280,11 +280,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gizmoColor: {r: 0.24372911, g: 1, b: 0, a: 0.3137255}
-  gizmoRadius: 7
-  attackRange: 7
+  gizmoRadius: 20
+  attackRange: 20
   enemyList: []
   rotationSpeed: 5
   partToRotate: {fileID: 7343336861391384028}
   bullet: {fileID: 4057504502853109479, guid: f64fb7fe1367c15459b41ab83e2f366f, type: 3}
   firePoint: {fileID: 4884909776128542503}
-  shootDelay: 1
+  shootDelay: 0.75
+  atk: 60
