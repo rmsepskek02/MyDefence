@@ -45,8 +45,8 @@ public class BuildManager : MonoBehaviour
         else
         {
             targetTile = tileGo;
-            tileUI.ShowTileUI();
             turretToBuild = null;
+            tileUI.ShowTileUI();
         }
     }
 }

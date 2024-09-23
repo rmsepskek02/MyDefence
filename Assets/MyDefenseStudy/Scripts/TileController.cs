@@ -33,7 +33,12 @@ public class TileController : MonoBehaviour
     // 마우스가 오브젝트에 들어왔을 때 호출
     void OnMouseEnter()
     {
-        turretBlueprint = bm.GetTurretToBuild();
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            Debug.Log("UI 요소 위를 클릭했습니다.");
+            return;
+        }
+        //turretBlueprint = bm.GetTurretToBuild();
         if (turretBlueprint == null) return;
 
         mesh.enabled = true;
