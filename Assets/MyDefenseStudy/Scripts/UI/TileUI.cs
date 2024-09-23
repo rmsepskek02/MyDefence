@@ -10,7 +10,7 @@ public class TileUI : MonoBehaviour
     public Button sellButton;
     public TextMeshProUGUI upgradeText;
     public TextMeshProUGUI sellText;
-    GameObject tileUI;
+    public GameObject tileUI;
     BuildManager bm;
     
     // Start is called before the first frame update
@@ -23,7 +23,7 @@ public class TileUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnClickUpgrade()
@@ -42,9 +42,12 @@ public class TileUI : MonoBehaviour
     public void ShowTileUI()
     {
         tileUI.SetActive(true);
-        tileUI.transform.position = bm.targetTile.transform.position + new Vector3(0, 3f, 1f);
-        //upgradeText.text = $"Upgrade\n{bm.GetTurretToBuild().upgradeCost}G";
-        //sellText.text = $"Sell\n{bm.GetTurretToBuild().cost / 2}G";
+        tileUI.transform.position = bm.targetTile.transform.position + new Vector3(0, 1f, 2f);
+        TileController tc = bm.targetTile.GetComponent<TileController>();
+        Debug.Log("TC = " + tc);
+        Debug.Log("TCturretBlueprint = " + tc.turretBlueprint);
+        //upgradeText.text = $"Upgrade\n{tc.turretBlueprint.upgradeCost}G";
+        //sellText.text = $"Sell\n{tc.turretBlueprint.cost / 2}G";
     }
 
     public void HideTileUI()

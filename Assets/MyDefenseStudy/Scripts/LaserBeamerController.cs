@@ -9,13 +9,11 @@ public class LaserBeamerController : TurretController
     public ParticleSystem laserEffect;
     public Light laserLight;
     float atkTime = 0;
-
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         lineRenderer = GetComponent<LineRenderer>();
-        atk = turretBp.atk;
         slow = 0.4f;
         atkTime = 0;
         // 선의 너비 설정 (시작, 끝 너비)

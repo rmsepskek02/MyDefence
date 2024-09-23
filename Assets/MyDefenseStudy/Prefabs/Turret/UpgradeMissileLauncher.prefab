@@ -62,7 +62,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 2fc3f5ed8d531a14bad565e3e40c7131, type: 2}
-  - {fileID: 2100000, guid: 9da90b6de2de89049807dd76e9892ca5, type: 2}
+  - {fileID: 2100000, guid: 015e1b627aa0a8447bdfd72a4da56ed3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 3017565746980124440}
   - component: {fileID: 3615292634997322527}
   m_Layer: 0
-  m_Name: MissileLauncher
+  m_Name: UpgradeMissileLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +144,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: -4}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9164592433069406642}
@@ -164,14 +164,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gizmoColor: {r: 0.15566039, g: 0.21392688, b: 1, a: 0}
-  gizmoRadius: 12
-  attackRange: 12
+  gizmoRadius: 20
+  attackRange: 20
   enemyList: []
   rotationSpeed: 5
   partToRotate: {fileID: 9164592433069406642}
   bullet: {fileID: 8582654477067529325, guid: 2958acad096a0fe41bb9361a3da4e619, type: 3}
   firePoint: {fileID: 4828254227076795992}
   shootDelay: 4
+  atk: 0
+  startAtk: 60
 --- !u!1 &4131982178869974637
 GameObject:
   m_ObjectHideFlags: 0

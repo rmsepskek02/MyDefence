@@ -14,18 +14,15 @@ public class TurretController : MonoBehaviour
     public GameObject bullet;
     public Transform firePoint;
     public float shootDelay = 4.0f;
-    float shootTime = 0;
-    float time = 0;
+    float shootTime = 10;
+    float time = 10;
     GameObject closestObject = null;
     public int atk = 0;
-    public TurretBlueprint turretBp;
-    BuildManager bm;
+    public int startAtk;
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        bm = BuildManager.instance;
-        turretBp = bm.GetTurretToBuild();
-        atk = turretBp.atk;
+        atk = startAtk;
     }
 
     // Update is called once per frame
@@ -82,6 +79,7 @@ public class TurretController : MonoBehaviour
     {
         if (target == null)
         {
+            ShootBullet(null);
             return;
         }
 

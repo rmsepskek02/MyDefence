@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileLauncherController : TrurretController
+public class MissileLauncherController : TurretController
 {
 
 }

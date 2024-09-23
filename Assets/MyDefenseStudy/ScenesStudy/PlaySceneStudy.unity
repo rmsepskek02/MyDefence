@@ -4396,6 +4396,7 @@ MonoBehaviour:
   sellButton: {fileID: 5945820441306596578}
   upgradeText: {fileID: 6169188164191929104}
   sellText: {fileID: 7652038388055178964}
+  tileUI: {fileID: 0}
 --- !u!1001 &976234418
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7890,31 +7891,25 @@ MonoBehaviour:
     turretPrefab: {fileID: 4708132783510985936, guid: 28343dfec7d1e494db927268263b4348,
       type: 3}
     cost: 100
-    atk: 50
     upgradeTurretPrefab: {fileID: 8415123976835130049, guid: bac23290ed0446242ba4f7f37cca18a1,
       type: 3}
     upgradeCost: 150
-    upgradeAtk: 60
     offset: {x: 0, y: 0.05, z: 0}
   missileLauncher:
     turretPrefab: {fileID: 4014050281817382762, guid: 4d6cffa7d6b107a4693e1e3fcb7c3a40,
       type: 3}
     cost: 250
-    atk: 50
     upgradeTurretPrefab: {fileID: 4014050281817382762, guid: 0e791ef612b3b1c42a4c0ec424fd9ed8,
       type: 3}
     upgradeCost: 300
-    upgradeAtk: 60
     offset: {x: 0, y: 0, z: 0}
   LaserBeamer:
     turretPrefab: {fileID: 7675980793162124533, guid: f981baaca118eff4a99d53f0122a9e63,
       type: 3}
     cost: 350
-    atk: 30
     upgradeTurretPrefab: {fileID: 7675980793162124533, guid: 3763b77bea1ae1746b8d4570a75628fe,
       type: 3}
     upgradeCost: 500
-    upgradeAtk: 40
     offset: {x: 0, y: -0.22, z: 0}
   basicTurretGold: {fileID: 2053214132}
   missileLauncherGold: {fileID: 1982493995}
@@ -8358,22 +8353,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1196837133826078166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9209730301781717788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65c7869d0a8dbc94a95a27f5f7fc5962, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradeButton: {fileID: 5185136159432967136}
-  sellButton: {fileID: 5945820441306596578}
-  upgradeText: {fileID: 6169188164191929104}
-  sellText: {fileID: 7652038388055178964}
 --- !u!1 &1843360213308659997
 GameObject:
   m_ObjectHideFlags: 0
@@ -8570,7 +8549,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1196837133826078166}
+      - m_Target: {fileID: 971112843}
         m_TargetAssemblyTypeName: TileUI, Assembly-CSharp
         m_MethodName: OnClickUpgrade
         m_Mode: 1
@@ -8649,7 +8628,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1196837133826078166}
+      - m_Target: {fileID: 971112843}
         m_TargetAssemblyTypeName: TileUI, Assembly-CSharp
         m_MethodName: OnClickSell
         m_Mode: 1
@@ -9024,7 +9003,6 @@ GameObject:
   - component: {fileID: 5823330363182475720}
   - component: {fileID: 5950684879930252488}
   - component: {fileID: 834800447368807687}
-  - component: {fileID: 1196837133826078166}
   - component: {fileID: 9219930072801895319}
   m_Layer: 5
   m_Name: TileUICanvas

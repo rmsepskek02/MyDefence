@@ -17,7 +17,6 @@ public class BuildManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //turretToBuild = basicTurretPrefab;
         tileUI = tileUIgo.GetComponent<TileUI>();
     }
 

@@ -9,11 +9,12 @@ public class TileController : MonoBehaviour
     BuildManager bm;
     public Material hoverMaterial;
     public GameObject createEffect;
-    
-    private TurretBlueprint turretBlueprint;
+    public GameObject destroyEffect;
+
+    public TurretBlueprint turretBlueprint;
     private GameObject targetTile;
     private Material startMaterial;
-    private GameObject turretObj;
+    public GameObject turretObj;
     // Start is called before the first frame update
     void Start()
     {
@@ -103,8 +104,6 @@ public class TileController : MonoBehaviour
         {
             Destroy(turretObj);
             turretObj = Instantiate(turretBlueprint.upgradeTurretPrefab, transform.position, Quaternion.identity);
-            TurretController tc = turretObj.GetComponent<TurretController>();
-            //tc.atk = turretBlueprint.upgradeAtk;
             
             GameObject _createEffect = Instantiate(createEffect, GetTurretBuildPosition(turretBlueprint.offset), Quaternion.identity);
             Destroy(_createEffect, 2f);
@@ -113,7 +112,10 @@ public class TileController : MonoBehaviour
 
     public void SellTurret()
     {
+        Destroy(turretObj);
         PlayerStats.AddMoney(turretBlueprint.cost / 2);
+        GameObject _createEffect = Instantiate(destroyEffect, GetTurretBuildPosition(turretBlueprint.offset), Quaternion.identity);
+        Destroy(_createEffect, 2f);
     }
 
     private Vector3 GetTurretBuildPosition(Vector3 offset)

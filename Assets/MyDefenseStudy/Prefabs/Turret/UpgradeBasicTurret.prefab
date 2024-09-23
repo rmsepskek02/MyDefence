@@ -242,7 +242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7509301948920955701}
-  - component: {fileID: 1790221887726447586}
+  - component: {fileID: -671469202600083013}
   m_Layer: 0
   m_Name: UpgradeBasicTurret
   m_TagString: Untagged
@@ -267,7 +267,7 @@ Transform:
   - {fileID: 3723807262487447297}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1790221887726447586
+--- !u!114 &-671469202600083013
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -276,16 +276,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 8415123976835130049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea81647e744cd540a8311a59c31253e, type: 3}
+  m_Script: {fileID: 11500000, guid: b1bbde4dd0e4a484ba22a5bf487efbc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmoColor: {r: 0.24372911, g: 1, b: 0, a: 0.3137255}
-  gizmoRadius: 20
-  attackRange: 20
+  gizmoColor: {r: 0, g: 0, b: 0, a: 0}
+  gizmoRadius: 12
+  attackRange: 12
   enemyList: []
   rotationSpeed: 5
   partToRotate: {fileID: 7343336861391384028}
   bullet: {fileID: 4057504502853109479, guid: f64fb7fe1367c15459b41ab83e2f366f, type: 3}
   firePoint: {fileID: 4884909776128542503}
-  shootDelay: 0.75
-  atk: 60
+  shootDelay: 4
+  atk: 0
+  startAtk: 60

@@ -4981,7 +4981,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 846baa5b311860745995894c6d0b7346, type: 2}
+  - {fileID: 2100000, guid: 77762230d97de4f4aa69f22de41cd07f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5257,7 +5257,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0.029678345, a: 1}
+      maxColor: {r: 0.16316223, g: 1, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9876,7 +9876,7 @@ GameObject:
   - component: {fileID: 3003979444803068537}
   - component: {fileID: -272678238633715721}
   m_Layer: 0
-  m_Name: UpgradeLaserBeamer
+  m_Name: LaserBeamer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9922,14 +9922,7 @@ MonoBehaviour:
   firePoint: {fileID: 4908784931035637666}
   shootDelay: 1
   atk: 0
-  turretBp:
-    turretPrefab: {fileID: 0}
-    cost: 0
-    atk: 0
-    upgradeTurretPrefab: {fileID: 0}
-    upgradeCost: 0
-    upgradeAtk: 0
-    offset: {x: 0, y: 0, z: 0}
+  startAtk: 30
   slow: 0
   laserEffect: {fileID: 1140040194049029117}
   laserLight: {fileID: 7696740049579187532}
@@ -9954,7 +9947,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e00684e0f70626149a29d2a6e57c85c5, type: 2}
+  - {fileID: 2100000, guid: 39635874d3be995419ff7adbd5e1d61e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10065,7 +10058,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 171263189146701793}
@@ -10081,7 +10074,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0, b: 0.010103226, a: 1}
+  m_Color: {r: 0.15044188, g: 1, b: 0, a: 1}
   m_Intensity: 3
   m_Range: 5
   m_SpotAngle: 30
