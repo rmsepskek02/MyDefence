@@ -6,7 +6,10 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
     private TurretBlueprint turretToBuild;
-    
+    public GameObject targetTile;
+    public GameObject tileUIgo;
+    TileUI tileUI;
+
     private void Awake()
     {
         instance = this;
@@ -15,21 +18,36 @@ public class BuildManager : MonoBehaviour
     void Start()
     {
         //turretToBuild = basicTurretPrefab;
+        tileUI = tileUIgo.GetComponent<TileUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public TurretBlueprint GetTurretToBuild()
     {
         return turretToBuild;
     }
-    public TurretBlueprint SetTurretToBuild(TurretBlueprint turret)
+    public void SetTurretToBuild(TurretBlueprint turret)
     {
         turretToBuild = turret;
-        return turretToBuild;
+        tileUI.HideTileUI();
+    }
+
+    public void SetTile(GameObject tileGo)
+    {
+        if (tileGo == targetTile)
+        {
+            tileUI.HideTileUI();
+        }
+        else
+        {
+            targetTile = tileGo;
+            tileUI.ShowTileUI();
+            turretToBuild = null;
+        }
     }
 }

@@ -4055,6 +4055,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545a0f6d1cea096469fba52889de77c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetTile: {fileID: 0}
+  tileUIgo: {fileID: 971112841}
 --- !u!1 &937097586
 GameObject:
   m_ObjectHideFlags: 0
@@ -4345,6 +4347,55 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 955918528}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &971112841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 971112842}
+  - component: {fileID: 971112843}
+  m_Layer: 0
+  m_Name: TileUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &971112842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971112841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 9219930072801895318}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &971112843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971112841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c7869d0a8dbc94a95a27f5f7fc5962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeButton: {fileID: 5185136159432967136}
+  sellButton: {fileID: 5945820441306596578}
+  upgradeText: {fileID: 6169188164191929104}
+  sellText: {fileID: 7652038388055178964}
 --- !u!1001 &976234418
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7840,29 +7891,34 @@ MonoBehaviour:
       type: 3}
     cost: 100
     atk: 50
+    upgradeTurretPrefab: {fileID: 8415123976835130049, guid: bac23290ed0446242ba4f7f37cca18a1,
+      type: 3}
+    upgradeCost: 150
+    upgradeAtk: 60
+    offset: {x: 0, y: 0.05, z: 0}
   missileLauncher:
     turretPrefab: {fileID: 4014050281817382762, guid: 4d6cffa7d6b107a4693e1e3fcb7c3a40,
       type: 3}
     cost: 250
     atk: 50
+    upgradeTurretPrefab: {fileID: 4014050281817382762, guid: 0e791ef612b3b1c42a4c0ec424fd9ed8,
+      type: 3}
+    upgradeCost: 300
+    upgradeAtk: 60
+    offset: {x: 0, y: 0, z: 0}
   LaserBeamer:
     turretPrefab: {fileID: 7675980793162124533, guid: f981baaca118eff4a99d53f0122a9e63,
       type: 3}
     cost: 350
-    atk: 0
-  UpgradeBasicTurret:
-    turretPrefab: {fileID: 8415123976835130049, guid: bac23290ed0446242ba4f7f37cca18a1,
+    atk: 30
+    upgradeTurretPrefab: {fileID: 7675980793162124533, guid: 3763b77bea1ae1746b8d4570a75628fe,
       type: 3}
-    cost: 0
-    atk: 60
+    upgradeCost: 500
+    upgradeAtk: 40
+    offset: {x: 0, y: -0.22, z: 0}
   basicTurretGold: {fileID: 2053214132}
   missileLauncherGold: {fileID: 1982493995}
   LaserBeamerGold: {fileID: 937097588}
-  test:
-    turretPrefab: {fileID: 0}
-    cost: 0
-    atk: 0
-    damage: 0
 --- !u!1001 &2102491317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8316,12 +8372,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeButton: {fileID: 5185136159432967136}
   sellButton: {fileID: 5945820441306596578}
-  animator: {fileID: 0}
-  testobj:
-    turretPrefab: {fileID: 8415123976835130049, guid: bac23290ed0446242ba4f7f37cca18a1,
-      type: 3}
-    cost: 0
-    atk: 0
+  upgradeText: {fileID: 6169188164191929104}
+  sellText: {fileID: 7652038388055178964}
 --- !u!1 &1843360213308659997
 GameObject:
   m_ObjectHideFlags: 0
@@ -8540,7 +8592,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 330585545}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -8975,7 +9027,7 @@ GameObject:
   - component: {fileID: 1196837133826078166}
   - component: {fileID: 9219930072801895319}
   m_Layer: 5
-  m_Name: TileUI
+  m_Name: TileUICanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8988,14 +9040,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9209730301781717788}
-  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.03, y: 0.03, z: 1}
+  m_LocalScale: {x: 0.03, y: 0.030000007, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6934323505882817409}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+  m_Father: {fileID: 971112842}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 335.5, y: 180}
@@ -9040,4 +9092,4 @@ SceneRoots:
   - {fileID: 913971762}
   - {fileID: 720145073}
   - {fileID: 1524398192}
-  - {fileID: 9219930072801895318}
+  - {fileID: 971112842}

@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserBeamerController : TrurretController
+public class LaserBeamerController : TurretController
 {
     private LineRenderer lineRenderer;
-    GameObject tempGo;
     public float slow;
     public ParticleSystem laserEffect;
     public Light laserLight;
     float atkTime = 0;
+
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         lineRenderer = GetComponent<LineRenderer>();
-        atk = 30;
+        atk = turretBp.atk;
         slow = 0.4f;
         atkTime = 0;
         // 선의 너비 설정 (시작, 끝 너비)

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MyDefence
 {
@@ -43,6 +44,11 @@ namespace MyDefence
                 return PlayerStats.HasMoney(turretToBuild.cost);
             }
         }
+
+        //타일 UI
+        public TileUI tileUI;
+        //선택된 타일
+        private Tile selectTile;
         #endregion
 
         public TurretBlueprint GetTurretToBuild()
@@ -54,6 +60,38 @@ namespace MyDefence
         public void SetTurretToBuild(TurretBlueprint turret)
         {
             turretToBuild = turret;
+
+            //선택된 타일 해제하기
+            DeselectTile();
+        }
+
+        //매개변수로 선택한 타일 정보를 얻어온다
+        public void SelectTile(Tile tile)
+        {
+            //같은 타일을 선택하면 HideUI
+            if(selectTile == tile)
+            {
+                DeselectTile();
+                return;
+            }
+
+            //선택한 타일 저장하기
+            selectTile = tile;
+            //저장된 터렛 속성을 초기화
+            turretToBuild = null;
+
+            //Debug.Log("타일 UI 보여주기");
+            tileUI.ShowTileUI(tile);
+        }
+
+        //선택 해제
+        public void DeselectTile()
+        {
+            //Debug.Log("타일 UI 감추기");
+            tileUI.HideTileUI();
+
+            //선택한 타일 초기화 하기
+            selectTile = null;
         }
 
     }

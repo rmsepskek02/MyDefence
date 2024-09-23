@@ -31,9 +31,6 @@ namespace MyDefence
 
         //터렛 건설 이펙트 프리팹
         public GameObject buildEffectPrefab;
-
-        //터렛 설치 위치 보정값
-        public Vector3 offset;
         #endregion
 
         private void Start()
@@ -83,7 +80,8 @@ namespace MyDefence
 
             if (turret != null)
             {
-                Debug.Log("이미 터렛이 설치 되어 있습니다");
+                //Debug.Log("타일에 터렛이 설치되어 있으면 타일 UI 보여주기");
+                buildManager.SelectTile(this);
                 return;
             }
 
@@ -93,20 +91,56 @@ namespace MyDefence
                 return;
             }
 
+            BuildTurret();
+        }
+
+        private void BuildTurret()
+        {
+            //설치할 터렛의 속성값 가져오기 (터렛 프리팹, 건설비용, 업그레이드 프리팹, 업그레이드 비용.....)
             blueprint = buildManager.GetTurretToBuild();
 
             //돈을 지불한다 100, 250
             //Debug.Log($"터렛 건설비용: {blueprint.cost}");
-            if(PlayerStats.UseMoney(blueprint.cost))
+            if (PlayerStats.UseMoney(blueprint.cost))
             {
                 //터렛 건설 이펙트
-                GameObject effectGo = Instantiate(buildEffectPrefab, this.transform.position + offset, Quaternion.identity);
+                GameObject effectGo = Instantiate(buildEffectPrefab, GetBuildPosition(), Quaternion.identity);
                 Destroy(effectGo, 2f);
 
                 //터렛 건설
-                turret = Instantiate(blueprint.turretPrefab, this.transform.position + offset, Quaternion.identity);
+                turret = Instantiate(blueprint.turretPrefab, GetBuildPosition(), Quaternion.identity);
                 //Debug.Log($"건설하고 남은돈: {PlayerStats.Money}");
             }
+        }
+
+        public void UpgradeTurret()
+        {
+            //설치한 터렛의 속성값 체크
+            if (blueprint == null)
+            {
+                Debug.Log("업그레이드에 실패 했습니다");
+                return;
+            }
+
+            //Debug.Log("터렛 업그레이드");
+            if (PlayerStats.UseMoney(blueprint.upgradeCost))
+            {
+                //터렛 건설 이펙트
+                GameObject effectGo = Instantiate(buildEffectPrefab, GetBuildPosition(), Quaternion.identity);
+                Destroy(effectGo, 2f);
+
+                //기존 터렛 킬
+                Destroy(turret);
+
+                //터렛 건설
+                turret = Instantiate(blueprint.turretUpgradePrefab, GetBuildPosition(), Quaternion.identity);
+            }
+        }
+
+        //터렛 설치 위치
+        public Vector3 GetBuildPosition()
+        {
+            return this.transform.position + blueprint.offset;
         }
 
         private void OnMouseExit()

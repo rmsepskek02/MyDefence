@@ -11,6 +11,7 @@ public class TileController : MonoBehaviour
     public GameObject createEffect;
     
     private TurretBlueprint turretBlueprint;
+    private GameObject targetTile;
     private Material startMaterial;
     private GameObject turretObj;
     // Start is called before the first frame update
@@ -62,37 +63,20 @@ public class TileController : MonoBehaviour
             Debug.Log("UI 요소 위를 클릭했습니다.");
             return;
         }
+
         if (turretObj != null)
         {
-            
-            // 켜져있음
-            if (TileUI.tileUI.activeSelf)
-            {
-                // 다른타일임
-                if (TileUI.mapTile != gameObject)
-                {
-                    TileUI.instance.animator.Rebind();
-                    TileUI.instance.animator.Play("TileUIAnim");
-                    TileUI.tileUI.transform.position = transform.position + new Vector3(0, 2f, 1f);
-                    TileUI.mapTile = gameObject;
-                }
-                // 같은타일임
-                else
-                {
-                    TileUI.tileUI.SetActive(false);
-                }
-            }
-            // 꺼져있음
-            else
-            {
-                TileUI.tileUI.SetActive(true);
-                TileUI.tileUI.transform.position = transform.position + new Vector3(0, 2f, 1f);
-                TileUI.mapTile = gameObject;
-            }
-            
+            bm.SetTile(gameObject);
+            //bm.SetTurretToBuild(turretBlueprint);
+
             return;
         }
 
+        BuildTurret();
+    }
+
+    private void BuildTurret()
+    {
         turretBlueprint = bm.GetTurretToBuild();
         if (turretBlueprint == null)
         {
@@ -103,9 +87,37 @@ public class TileController : MonoBehaviour
         if (PlayerStats.UseMoney(turretBlueprint.cost) == true)
         {
             turretObj = Instantiate(turretBlueprint.turretPrefab, transform.position, Quaternion.identity);
-            GameObject _createEffect = Instantiate(createEffect, transform.position, Quaternion.identity);
+            GameObject _createEffect = Instantiate(createEffect, GetTurretBuildPosition(turretBlueprint.offset), Quaternion.identity);
             Destroy(_createEffect, 2f);
             Debug.Log($"건설하고 남은돈: {PlayerStats.Money}");
         }
+    }
+    public void UpgradeTurret()
+    {
+        if(turretBlueprint == null)
+        {
+            Debug.Log("Upgrade ERR");
+            return;
+        }
+        if (PlayerStats.UseMoney(turretBlueprint.upgradeCost) == true)
+        {
+            Destroy(turretObj);
+            turretObj = Instantiate(turretBlueprint.upgradeTurretPrefab, transform.position, Quaternion.identity);
+            TurretController tc = turretObj.GetComponent<TurretController>();
+            //tc.atk = turretBlueprint.upgradeAtk;
+            
+            GameObject _createEffect = Instantiate(createEffect, GetTurretBuildPosition(turretBlueprint.offset), Quaternion.identity);
+            Destroy(_createEffect, 2f);
+        }
+    }
+
+    public void SellTurret()
+    {
+        PlayerStats.AddMoney(turretBlueprint.cost / 2);
+    }
+
+    private Vector3 GetTurretBuildPosition(Vector3 offset)
+    {
+        return transform.position + offset;
     }
 }
