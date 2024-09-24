@@ -15,5 +15,11 @@ namespace MyDefence
 
         public Vector3 offset;          //터렛 건설 위치 보정값
         //....
+
+        //판매 가격
+        public int GetSellCost()
+        {
+            return cost / 2;
+        }
     }
 }

@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 namespace MyDefence
 {
@@ -13,6 +13,11 @@ namespace MyDefence
 
         //선택받은 타일
         private Tile targetTile;
+
+        //업그레이드 가격 텍스트, 버튼, 판매가격 텍스트
+        public TextMeshProUGUI upgradeCost;
+        public Button upgradeButton;
+        public TextMeshProUGUI sellCost;
         #endregion
 
         private void Start()
@@ -29,6 +34,22 @@ namespace MyDefence
 
             //터렛이 설치된 위치에서 보여준다
             this.transform.position = targetTile.GetBuildPosition();
+
+            //업그레이드 가격 표시
+            if(targetTile.IsUpgrade)
+            {
+                upgradeCost.text = "DONE";
+                upgradeButton.interactable = false;
+            }
+            else
+            {
+                upgradeCost.text = targetTile.blueprint.upgradeCost.ToString() + " G";
+                upgradeButton.interactable = true;
+            }
+
+            //판매 가격 표시
+            sellCost.text = targetTile.blueprint.GetSellCost().ToString() + " G";
+
             tileUI.SetActive(true);
         }
 
@@ -47,8 +68,10 @@ namespace MyDefence
         }
 
         public void Sell()
-        {
-            Debug.Log("Sell Turret");
+        {            
+            Debug.Log("Sell Turret");            
+            targetTile.SellTurret();
+            buildManager.DeselectTile();
         }
     }
 }

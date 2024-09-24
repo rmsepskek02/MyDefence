@@ -8,6 +8,7 @@ public class BuildManager : MonoBehaviour
     private TurretBlueprint turretToBuild;
     public GameObject targetTile;
     public GameObject tileUIgo;
+    public bool CannotBuild => turretToBuild == null;
     TileUI tileUI;
 
     private void Awake()

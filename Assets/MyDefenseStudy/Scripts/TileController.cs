@@ -10,7 +10,18 @@ public class TileController : MonoBehaviour
     public Material hoverMaterial;
     public GameObject createEffect;
     public GameObject destroyEffect;
-
+    private int upgradeStep = 1;
+    public int UpgradeStep
+    {
+        get { return upgradeStep; }
+        set
+        {
+            if (value > 0)        // 조건 추가 (예: 0보다 큰 값만 허용)
+            {
+                upgradeStep = value;
+            }
+        }
+    }
     public TurretBlueprint turretBlueprint;
     private GameObject targetTile;
     private Material startMaterial;
@@ -38,8 +49,10 @@ public class TileController : MonoBehaviour
             Debug.Log("UI 요소 위를 클릭했습니다.");
             return;
         }
-        //turretBlueprint = bm.GetTurretToBuild();
-        if (turretBlueprint == null) return;
+        if (bm.CannotBuild)
+        {
+            return;
+        }
 
         mesh.enabled = true;
         mesh.material = hoverMaterial;
@@ -89,7 +102,6 @@ public class TileController : MonoBehaviour
             Debug.Log("터렛을 설치하지 못했습니다.!!");
             return;
         };
-
         if (PlayerStats.UseMoney(turretBlueprint.cost) == true)
         {
             turretObj = Instantiate(turretBlueprint.turretPrefab, transform.position, Quaternion.identity);
@@ -105,11 +117,13 @@ public class TileController : MonoBehaviour
             Debug.Log("Upgrade ERR");
             return;
         }
+
         if (PlayerStats.UseMoney(turretBlueprint.upgradeCost) == true)
         {
             Destroy(turretObj);
             turretObj = Instantiate(turretBlueprint.upgradeTurretPrefab, transform.position, Quaternion.identity);
-            
+            upgradeStep++;
+
             GameObject _createEffect = Instantiate(createEffect, GetTurretBuildPosition(turretBlueprint.offset), Quaternion.identity);
             Destroy(_createEffect, 2f);
         }
@@ -117,9 +131,13 @@ public class TileController : MonoBehaviour
 
     public void SellTurret()
     {
+        float sellMoney = turretBlueprint.GetSellCost();
         Destroy(turretObj);
-        PlayerStats.AddMoney(turretBlueprint.cost / 2);
         GameObject _createEffect = Instantiate(destroyEffect, GetTurretBuildPosition(turretBlueprint.offset), Quaternion.identity);
+        turretObj = null;
+        turretBlueprint = null;
+        upgradeStep = 1;
+        PlayerStats.AddMoney(sellMoney);
         Destroy(_createEffect, 2f);
     }
 

@@ -118,10 +118,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cb091cb105a0294ca3826e58d63c228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blueprint:
+    turretPrefab: {fileID: 0}
+    cost: 0
+    turretUpgradePrefab: {fileID: 0}
+    upgradeCost: 0
+    offset: {x: 0, y: 0, z: 0}
   notEnoughColor: {r: 1, g: 0, b: 0, a: 1}
   hoverMaterial: {fileID: 2100000, guid: 9df03b3e503b0ed47911f014e1daf401, type: 2}
   buildEffectPrefab: {fileID: 3771260771338358989, guid: ca81f7a64736cab42abbe4ab05415e7a,
     type: 3}
-  offset: {x: 0, y: 0.05, z: 0}
-  offset2: {x: 0, y: 0.03, z: 0}
-  offset3: {x: 0, y: -0.2, z: 0}
+  sellEffectPrefab: {fileID: 2605118147783716905, guid: 278afa109827892488b68b1fb09cdd86,
+    type: 3}

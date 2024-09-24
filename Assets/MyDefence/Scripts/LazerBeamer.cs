@@ -14,7 +14,7 @@ namespace MyDefence
         public Light impactLight;
 
         //레이저 데미지
-        private float lazerDamage = 30f;
+        [SerializeField] private float lazerDamage = 30f;
         //초당 30 데미지
         [SerializeField] private float speed = 30f;
         //Enemy 속도 40% 감속

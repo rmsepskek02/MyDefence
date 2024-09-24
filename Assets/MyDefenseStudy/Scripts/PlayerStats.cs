@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     #region
-    private static int money;
-    public static int Money
+    private static float money;
+    public static float Money
     {
         get { return money; }
     }
-    [SerializeField] private int startMoney = 400;
+    [SerializeField] private float startMoney = 400;
 
     private static int life;
     public static int Life
@@ -46,7 +46,7 @@ public class PlayerStats : MonoBehaviour
         
     }
 
-    public static bool UseMoney(int cost)
+    public static bool UseMoney(float cost)
     {
         if (money >= cost)
         {
@@ -55,7 +55,7 @@ public class PlayerStats : MonoBehaviour
         }
         return false;
     }
-    public static void AddMoney(int cost)
+    public static void AddMoney(float cost)
     {
         money += cost;
     }

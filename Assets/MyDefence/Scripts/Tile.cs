@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEngine.GraphicsBuffer;
 
 namespace MyDefence
 {
@@ -10,7 +11,7 @@ namespace MyDefence
         private GameObject turret;
 
         //현재 선택된 터렛 blueprint(prefab, cost, ....)
-        private TurretBlueprint blueprint;
+        public TurretBlueprint blueprint;
 
         //빌드매니저 객체
         private BuildManager buildManager;
@@ -31,6 +32,12 @@ namespace MyDefence
 
         //터렛 건설 이펙트 프리팹
         public GameObject buildEffectPrefab;
+
+        //터렛 판매 이펙트 프리팹
+        public GameObject sellEffectPrefab;
+
+        //터렛 업그레이드 여부
+        public bool IsUpgrade { get; private set; }
         #endregion
 
         private void Start()
@@ -43,6 +50,7 @@ namespace MyDefence
             rend.enabled = false;
             //startColor = rend.material.color;
             startMaterial = rend.material;
+            IsUpgrade = false;
         }
 
         private void OnMouseEnter()
@@ -132,9 +140,33 @@ namespace MyDefence
                 //기존 터렛 킬
                 Destroy(turret);
 
+                //업그레이드 여부
+                IsUpgrade = true;
+
                 //터렛 건설
                 turret = Instantiate(blueprint.turretUpgradePrefab, GetBuildPosition(), Quaternion.identity);
             }
+        }
+
+        public void SellTurret()
+        {
+            //판매가격 저장
+            int sellMoney = blueprint.GetSellCost();            
+
+            //터렛을 킬
+            Destroy(turret);
+
+            //판매 이펙트
+            GameObject effectGo = Instantiate(sellEffectPrefab, GetBuildPosition(), Quaternion.identity);
+            Destroy(effectGo, 2f);
+
+            //건설 관련 속성 초기화            
+            turret = null;
+            blueprint = null;
+            IsUpgrade = false;
+
+            //판매가격 벌기
+            PlayerStats.AddMoney(sellMoney);
         }
 
         //터렛 설치 위치

@@ -6,8 +6,13 @@ using UnityEngine;
 public class TurretBlueprint
 {
     public GameObject turretPrefab;
-    public int cost;
+    public float cost;
     public GameObject upgradeTurretPrefab;
     public int upgradeCost;
     public Vector3 offset;
+
+    public float GetSellCost()
+    {
+        return cost / 2;
+    }
 }

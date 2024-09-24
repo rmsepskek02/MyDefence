@@ -12,7 +12,7 @@ public class TileUI : MonoBehaviour
     public TextMeshProUGUI sellText;
     public GameObject tileUI;
     BuildManager bm;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,10 +44,18 @@ public class TileUI : MonoBehaviour
         tileUI.SetActive(true);
         tileUI.transform.position = bm.targetTile.transform.position + new Vector3(0, 1f, 2f);
         TileController tc = bm.targetTile.GetComponent<TileController>();
-        Debug.Log("TC = " + tc);
-        Debug.Log("TCturretBlueprint = " + tc.turretBlueprint);
-        //upgradeText.text = $"Upgrade\n{tc.turretBlueprint.upgradeCost}G";
-        //sellText.text = $"Sell\n{tc.turretBlueprint.cost / 2}G";
+
+        TurretBlueprint turret = bm.GetTurretToBuild();
+        if (tc.UpgradeStep > 1)
+        {
+            upgradeText.text = $"Upgrade\nDone";
+            upgradeButton.interactable = false;
+        }
+        else
+        {
+            upgradeText.text = $"Upgrade\n{tc.turretBlueprint.upgradeCost}G";
+        }
+        sellText.text = $"Sell\n{tc.turretBlueprint.GetSellCost()}G";
     }
 
     public void HideTileUI()
