@@ -16,7 +16,6 @@ public class TurretController : MonoBehaviour
     public float shootDelay = 4.0f;
     float shootTime = 10;
     float time = 10;
-    GameObject closestObject = null;
     public int atk = 0;
     public int startAtk;
     // Start is called before the first frame update
@@ -29,31 +28,25 @@ public class TurretController : MonoBehaviour
     protected virtual void Update()
     {
         time += Time.deltaTime;
-        closestObject = CheckMinDistance(enemyList);
-        TurnObject(closestObject);
-    }
-
-    // Enemy 모두 찾기
-    GameObject[] FindEnemy()
-    {
-        return GameObject.FindGameObjectsWithTag("Enemy");
+        TurnObject(CheckMinDistance());
     }
 
     // 가장 가까운 오브젝트 찾기
-    GameObject CheckMinDistance(GameObject[] goList)
+    GameObject CheckMinDistance()
     {
-        if (time > 2.5f)
+        if (time > 0.5f)
         {
-            enemyList = FindEnemy();
+            // Enemy 모두 찾기
+            enemyList = GameObject.FindGameObjectsWithTag("Enemy");
             time = 0;
         }
-        if (goList.Length == 0 || goList == null) return null;
+        if (enemyList.Length == 0 || enemyList == null) return null;
         // 최소 거리를 저장할 변수와 가장 가까운 오브젝트
         float minDistance = Mathf.Infinity;
         GameObject _closestObject = null;
 
         // 특정 오브젝트와 각 오브젝트 간의 거리를 계산
-        foreach (GameObject obj in goList)
+        foreach (GameObject obj in enemyList)
         {
             if (obj == null) continue;
 

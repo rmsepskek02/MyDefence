@@ -21,15 +21,17 @@ namespace MyDefence
         [SerializeField] private float slowRate = 0.4f;
         #endregion
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+
             lineRenderer = GetComponent<LineRenderer>();
         }
 
         void Update()
         {
             //0.5초마다 타겟 찾기 실행
-            if (countdown <= 0f)
+            /*if (countdown <= 0f)
             {
                 //타이머 실행문
                 UpdateTarget();
@@ -37,7 +39,7 @@ namespace MyDefence
                 //타이머 초기화
                 countdown = serachTimer;
             }
-            countdown -= Time.deltaTime;
+            countdown -= Time.deltaTime;*/
 
             //타겟을 찾지 못했으면
             if (target == null)

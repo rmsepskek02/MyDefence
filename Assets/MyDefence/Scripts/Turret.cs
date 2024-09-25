@@ -33,11 +33,17 @@ namespace MyDefence
         public string enemyTag = "Enemy";
         #endregion
 
+        protected virtual void Start()
+        {
+            //0.5초마다 타겟 찾기 실행
+            InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        }
+
         // Update is called once per frame
         void Update()
         {
             //0.5초마다 타겟 찾기 실행
-            if (countdown <= 0f)
+            /*if (countdown <= 0f)
             {
                 //타이머 실행문
                 UpdateTarget();
@@ -45,7 +51,7 @@ namespace MyDefence
                 //타이머 초기화
                 countdown = serachTimer;
             }
-            countdown -= Time.deltaTime;
+            countdown -= Time.deltaTime;*/
 
             //타겟을 찾지 못했으면
             if (target == null)
