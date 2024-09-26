@@ -6,6 +6,9 @@ namespace MyDefence
     public class PauseUI : MonoBehaviour
     {
         #region Variables
+        public SceneFader fader;
+        [SerializeField] private string loadToScene = "MainMenu";
+
         public GameObject pauseUI;
         #endregion
 
@@ -34,13 +37,13 @@ namespace MyDefence
         public void Retry()
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            fader.FadeTo(SceneManager.GetActiveScene().name);
         }
 
         public void Menu()
         {
             Time.timeScale = 1f;
-            Debug.Log("Goto Menu");
+            fader.FadeTo(loadToScene);
         }
 
     }

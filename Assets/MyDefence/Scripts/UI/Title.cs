@@ -8,6 +8,7 @@ namespace MyDefence
     public class Title : MonoBehaviour
     {
         #region Variables
+        public SceneFader fader;
         [SerializeField] private string loadToScene = "MainMenu";
 
         //GotoMenu 타이머

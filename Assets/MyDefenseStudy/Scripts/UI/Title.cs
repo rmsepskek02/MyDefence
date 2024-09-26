@@ -10,6 +10,7 @@ public class Title : MonoBehaviour
     [SerializeField] private float anykeyDelay = 3.0f;
     [SerializeField] private float menuDelay = 10.0f;
     public TextMeshProUGUI anyKey;
+    public SceneFader fader;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class Title : MonoBehaviour
         if (anyKey.gameObject.activeSelf == false) return;
         if(Input.anyKeyDown)
         {
-            SceneManager.LoadScene(loadToScene);
+            fader.FadeTo(loadToScene);
             StopAllCoroutines();
             return;
         }
@@ -39,6 +40,6 @@ public class Title : MonoBehaviour
         yield return new WaitForSeconds(anykeyDelay);
         anyKey.gameObject.SetActive(true);
         yield return new WaitForSeconds(menuDelay);
-        SceneManager.LoadScene(loadToScene);
+        fader.FadeTo(loadToScene);
     }
 }

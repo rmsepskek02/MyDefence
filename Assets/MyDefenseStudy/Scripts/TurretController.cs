@@ -34,7 +34,7 @@ public class TurretController : MonoBehaviour
     // 가장 가까운 오브젝트 찾기
     GameObject CheckMinDistance()
     {
-        if (time > 0.5f)
+        if (time > 1.5f)
         {
             // Enemy 모두 찾기
             enemyList = GameObject.FindGameObjectsWithTag("Enemy");

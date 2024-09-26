@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MyDefence
 {
@@ -20,6 +18,9 @@ namespace MyDefence
         //보상 금액
         [SerializeField]
         private int rewardGold = 50;
+
+        //HealthBar
+        public Image healthBar;
         #endregion
 
         private void Start()
@@ -33,6 +34,9 @@ namespace MyDefence
         {
             health -= damage;
             //Debug.Log($"health: {health}");
+
+            //HealthBar : 현재값(량) / 총값(량)
+            healthBar.fillAmount = health / startHealth;
 
             if (health <= 0)
             {

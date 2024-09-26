@@ -6,9 +6,12 @@ public class EnemyController : Damagable
 {
     public GameObject destroyEffect;
     [SerializeField] private float hp;
-    public float startHp;
-    [SerializeField] 
-    private int rewardGold;
+    public float Hp
+    {
+        get { return hp; }
+    }
+    [SerializeField] public float startHp;
+    [SerializeField] private int rewardGold;
     // Start is called before the first frame update
     void Start()
     {

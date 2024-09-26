@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
+    public SceneFader fader;
     [SerializeField] private string loadToScene = "PlaySceneStudy";
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void OnClickPlay()
     {
-        SceneManager.LoadScene(loadToScene);
+        fader.FadeTo(loadToScene);
     }
     public void OnClickQuit()
     {

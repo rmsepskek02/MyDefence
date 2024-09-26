@@ -11,10 +11,11 @@ public class GameManager : MonoBehaviour
     private static bool isGameOver = false;
     public static bool IsGameOver => isGameOver;
     public Canvas GameOverUI;
-    
+    public SceneFader fader;
     public Button RetryButton;
     public Button MenuButton;
     public TextMeshProUGUI roundText;
+    [SerializeField] private string loadToMenu = "MainMenuScene";
     #endregion
     private void OnEnable()
     {
@@ -53,12 +54,14 @@ public class GameManager : MonoBehaviour
     public void OnClickRetry()
     {
         GameOverUI.gameObject.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        fader.FadeTo(SceneManager.GetActiveScene().name);
         Debug.Log("RETRY");
     }
     public void OnClickMenu()
     {
         GameOverUI.gameObject.SetActive(false);
+        fader.FadeTo(loadToMenu);
         Debug.Log("MENU");
     }
 }
+

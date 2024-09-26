@@ -6,13 +6,14 @@ namespace MyDefence
     public class MainMenu : MonoBehaviour
     {
         #region Variables
+        public SceneFader fader;
         [SerializeField] private string loadToScene = "PlayScene";
         #endregion
 
         public void Play()
         {
-            Debug.Log("Goto Play Scene");
-            SceneManager.LoadScene(loadToScene);
+            //Debug.Log("Goto Play Scene");
+            fader.FadeTo(loadToScene);
         }
 
         public void Quit()
