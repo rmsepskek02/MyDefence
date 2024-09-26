@@ -2855,8 +2855,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMoney: 400
   startLife: 10
-  startRound: 1
-  startWave: 1
+  startRound: 0
+  startWave: 0
 --- !u!114 &736117123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6608,6 +6608,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5c06ea2ba2d8f4aa74a4a79fa04643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waves:
+  - enemyPrefab: {fileID: 7814400116943356666, guid: 708b6cf184753a94d84c10fb71a86652,
+      type: 3}
+    enemyCount: 1
+    spawnDelay: 0.5
+  - enemyPrefab: {fileID: 7814400116943356666, guid: 708b6cf184753a94d84c10fb71a86652,
+      type: 3}
+    enemyCount: 2
+    spawnDelay: 0.5
+  - enemyPrefab: {fileID: 7814400116943356666, guid: 708b6cf184753a94d84c10fb71a86652,
+      type: 3}
+    enemyCount: 5
+    spawnDelay: 0.5
+  - enemyPrefab: {fileID: 5920120076482667652, guid: b8c97ae797c565f4181119513ec2e6c1,
+      type: 3}
+    enemyCount: 3
+    spawnDelay: 1
+  - enemyPrefab: {fileID: 5437718639368709860, guid: 622d92f69a8722841bb229f123e0beba,
+      type: 3}
+    enemyCount: 10
+    spawnDelay: 0.33
   enemyObj: {fileID: 7814400116943356666, guid: 708b6cf184753a94d84c10fb71a86652,
     type: 3}
   startPoint: {fileID: 1675868626}

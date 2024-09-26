@@ -23,13 +23,13 @@ public class PlayerStats : MonoBehaviour
     {
         get { return round; }
     }
-    [SerializeField] private int startRound = 1;
+    [SerializeField] private int startRound = 0;
     private static int wave;
     public static int Wave
     {
         get { return wave; }
     }
-    [SerializeField] private int startWave = 1;
+    [SerializeField] private int startWave = 0;
     #endregion
     // Start is called before the first frame update
     void Start()
