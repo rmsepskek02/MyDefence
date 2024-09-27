@@ -13,11 +13,11 @@ public class SpawnManager : MonoBehaviour
     public float timerTime = 5f;   // 타이머 시간
     float roundDelay = 5f;  // 라운드 딜레이 시간
     int spawnCount = 0;     // 첫 스폰 개체 수
+    
     // Start is called before the first frame update
     void Start()
     {
         spawnPoint = startPoint.transform.position;
-        //StartCoroutine(DelayForRound(roundDelay, timerTime));
     }
 
     // Update is called once per frame
@@ -69,14 +69,17 @@ public class SpawnManager : MonoBehaviour
         if (PlayerStats.Round > waves.Length)
         {
             Debug.Log("LEVEL CLEAR");
+            PlayerPrefs.SetInt("nowLevel", GameManager.nowLevel + 1 );
             return;
         }
 
         if (PlayerStats.Wave > 0)
             return;
         // 개채 생성 수 증가
-        spawnCount++;
         PlayerStats.IncreaseRound();
+        if (PlayerStats.Round > waves.Length) { return; ; }
+        Wave currentWave = waves[PlayerStats.Round - 1];
+        spawnCount = currentWave.enemyCount;
         PlayerStats.SetWave(spawnCount);
         // 타이머 코루틴
         StartCoroutine(CheckTimer(_timerTime));

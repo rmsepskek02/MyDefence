@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuUI : MonoBehaviour
 {
     public SceneFader fader;
-    [SerializeField] private string loadToScene = "PlaySceneStudy";
+    [SerializeField] private string loadToScene = "LevelSelect";
     // Start is called before the first frame update
     void Start()
     {

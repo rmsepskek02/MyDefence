@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/MyDefenseStudy/ScenesStudy/MainMenuScene.unity
     guid: e835c19e3507b29449b44ff4c7d3a0c0
   - enabled: 1
-    path: Assets/MyDefenseStudy/ScenesStudy/PlaySceneStudy.unity
+    path: Assets/MyDefenseStudy/ScenesStudy/LevelSelect.unity
+    guid: 3cfdd8bbb16dad44d9e606871696705f
+  - enabled: 1
+    path: Assets/MyDefenseStudy/ScenesStudy/Level1.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/MyDefenseStudy/ScenesStudy/Level2.unity
+    guid: 1b38f9595aef1a84ab917fb6f0172244
   m_configObjects: {}

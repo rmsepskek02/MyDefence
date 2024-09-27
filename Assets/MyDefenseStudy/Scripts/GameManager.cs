@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     //게임오버 체크
     private static bool isGameOver = false;
     public static bool IsGameOver => isGameOver;
+    public static int nowLevel;
     public Canvas GameOverUI;
     public SceneFader fader;
     public Button RetryButton;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = false;
         GameOverUI.gameObject.SetActive(false);
+        nowLevel = int.Parse(SceneManager.GetActiveScene().name.Replace("Level", ""));
     }
     // Update is called once per frame
     void Update()
@@ -49,6 +51,10 @@ public class GameManager : MonoBehaviour
         {
             GameOverUI.gameObject.SetActive(true);
             isGameOver = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            PlayerPrefs.DeleteAll();
         }
     }
     public void OnClickRetry()
