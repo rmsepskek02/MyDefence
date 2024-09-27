@@ -12,6 +12,10 @@ namespace MyDefence
         #region Variable
         //enemy 프리팹
         public GameObject enemyPrefab;
+
+        //Wave 데이터 셋팅
+        public Wave[] waves;
+
         //스폰 위치(시작 위치)
         public Transform startPoint;
 
@@ -26,6 +30,9 @@ namespace MyDefence
         public TextMeshProUGUI countdownText;
         //스폰중이면 true, 아니면 false
         bool isSpawn = false;       //
+
+        //현재 맵상에서 살아있는 적의 수
+        public static int enmeyAlive = 0;
         #endregion
 
 
@@ -43,16 +50,10 @@ namespace MyDefence
         // Update is called once per frame
         void Update()
         {
-            /*countdown += Time.deltaTime;
-            Debug.Log($"countdown: {countdown}");
-            if(countdown >= spawnTimer)
-            {
-                //타이머 명령
-                Debug.Log($"enemy 생성");
+            //맵상에 적이 살아 있으면
+            if (enmeyAlive > 0)
+                return;
 
-                //초기화
-                countdown = 0;
-            }*/
             if (countdown <= 0f)
             {
                 //타이머 명령
@@ -73,28 +74,38 @@ namespace MyDefence
         }
 
         //시작지점 위치에 Enemy를 생성
-        private void SpawnEnemy()
+        private void SpawnEnemy(GameObject prefab)
         {
-            Instantiate(enemyPrefab, startPoint.position, Quaternion.identity);
-            //Instantiate(enemyPrefab);
+            Instantiate(prefab, startPoint.position, Quaternion.identity);
+            enmeyAlive++;
         }
 
         //웨이브 할때마다 1마리씩 추가 스폰  1 - 2 - 3 - 4 - 5..
+        //Wave 데이터에 맞게 적 스폰
         IEnumerator SpawnWave()
         {
             isSpawn = true;
+            //Debug.Log($"waveCount: {waveCount}");
+
+            Wave wave = waves[waveCount];
+
+            for (int i = 0; i < wave.count; i++)
+            {
+                SpawnEnemy(wave.enemyPrefab);
+                yield return new WaitForSeconds(wave.delayTime);
+            }
 
             waveCount++;
             PlayerStats.Rounds++;
-            //Debug.Log($"waveCount: {waveCount}");
-
-            for (int i = 0; i < waveCount; i++)
-            {
-                SpawnEnemy();
-                yield return new WaitForSeconds(0.5f);
-            }
 
             isSpawn = false;
+
+            //마지막 웨이브 체크해서 스폰기능 비활성화
+            if (waveCount >= waves.Length)
+            {
+                Debug.Log("Level Clear");
+                this.enabled = false;
+            }
         }
     }
 }

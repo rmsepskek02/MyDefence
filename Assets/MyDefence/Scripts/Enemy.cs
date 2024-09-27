@@ -53,6 +53,8 @@ namespace MyDefence
 
             //리워드로 50 Gold 지급
             PlayerStats.AddMoney(rewardGold);
+            //살아있는 적 카운팅
+            SpawnManager.enmeyAlive--;
 
             //kill
             Destroy(gameObject);

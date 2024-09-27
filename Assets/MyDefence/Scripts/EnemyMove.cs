@@ -68,6 +68,9 @@ namespace MyDefence
             //Debug.Log("종점 도착");
             PlayerStats.UseLives(1);
 
+            //살아있는 적 카운팅
+            SpawnManager.enmeyAlive--;
+
             //게임 오브젝트 kill
             Destroy(this.gameObject);
             //

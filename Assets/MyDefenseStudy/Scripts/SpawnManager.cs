@@ -12,7 +12,6 @@ public class SpawnManager : MonoBehaviour
     Vector3 spawnPoint = new Vector3();
     public float timerTime = 5f;   // 타이머 시간
     float roundDelay = 5f;  // 라운드 딜레이 시간
-    float spawnDelay = 1f;  // 스폰 딜레이 시간
     int spawnCount = 0;     // 첫 스폰 개체 수
     // Start is called before the first frame update
     void Start()
@@ -67,7 +66,7 @@ public class SpawnManager : MonoBehaviour
     // Wave 개수에 따른 라운드 시작
     void SpawnForRound(float _timerTime)
     {
-        if (PlayerStats.Round >= 5)
+        if (PlayerStats.Round > waves.Length)
         {
             Debug.Log("LEVEL CLEAR");
             return;
@@ -86,10 +85,3 @@ public class SpawnManager : MonoBehaviour
     }
 }
 
-[System.Serializable]
-public class Wave
-{
-    public GameObject enemyPrefab;  // 생성할 적의 프리팹
-    public int enemyCount;          // 적의 수
-    public float spawnDelay;        // 적 생성 지연 시간
-}
