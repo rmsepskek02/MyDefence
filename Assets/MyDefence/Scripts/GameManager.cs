@@ -1,3 +1,4 @@
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace MyDefence
@@ -12,6 +13,14 @@ namespace MyDefence
 
         //게임오버 UI
         public GameObject gameoverUI;
+
+        //레벨 클리어시 unlock되는 레벨
+        [SerializeField] private string keyName = "NowLevel";
+        [SerializeField] private int unlockLevel = 2;
+
+        //다음 레벨가기
+        public SceneFader fader;
+        [SerializeField] private string loadToScene = "Level02";
 
         //치팅 체크
         private bool isCheating = true;
@@ -46,6 +55,25 @@ namespace MyDefence
             {
                 GameOver();
             }
+        }
+
+        public void LevelClear()
+        {
+            //LevelClear 관련 데이터 처리 : 보상, 저장
+            //다음에 플레이 가능한 레벨
+            int nowLevel = PlayerPrefs.GetInt(keyName, 1);
+            //Debug.Log($"가져온 nowLevel: {nowLevel}");
+            if(unlockLevel > nowLevel)
+            {
+                PlayerPrefs.SetInt(keyName, unlockLevel);
+                //Debug.Log($"저장된 nowLevel: {unlockLevel}");
+            }
+
+            //UI창 활성화
+
+            //씬 이동
+            fader.FadeTo(loadToScene);
+
         }
 
         void GameOver()

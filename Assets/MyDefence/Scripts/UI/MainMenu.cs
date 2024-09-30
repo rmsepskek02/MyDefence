@@ -18,6 +18,9 @@ namespace MyDefence
 
         public void Quit()
         {
+            //Cheating
+            PlayerPrefs.DeleteAll();
+
             Debug.Log("Game Quit");
             Application.Quit();
         }

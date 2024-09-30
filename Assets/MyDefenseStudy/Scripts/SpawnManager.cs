@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class SpawnManager : MonoBehaviour
     public float timerTime = 5f;   // 타이머 시간
     float roundDelay = 5f;  // 라운드 딜레이 시간
     int spawnCount = 0;     // 첫 스폰 개체 수
-    
+    public TextMeshProUGUI roundTextClear;
+    public GameObject ClearUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,7 +72,14 @@ public class SpawnManager : MonoBehaviour
         if (PlayerStats.Round > waves.Length)
         {
             Debug.Log("LEVEL CLEAR");
-            PlayerPrefs.SetInt("nowLevel", GameManager.nowLevel + 1 );
+            ClearUI.SetActive(true);
+            roundTextClear.text = $"{SceneManager.GetActiveScene().name.Replace("Level", "")}";
+            int nowLevel = PlayerPrefs.GetInt("nowLevel", 1);
+            if (nowLevel < GameManager.nowLevel + 1)
+            {
+                PlayerPrefs.SetInt("nowLevel", GameManager.nowLevel + 1);
+            }
+            
             return;
         }
 
@@ -77,7 +87,7 @@ public class SpawnManager : MonoBehaviour
             return;
         // 개채 생성 수 증가
         PlayerStats.IncreaseRound();
-        if (PlayerStats.Round > waves.Length) { return; ; }
+        if (PlayerStats.Round > waves.Length) { return; }
         Wave currentWave = waves[PlayerStats.Round - 1];
         spawnCount = currentWave.enemyCount;
         PlayerStats.SetWave(spawnCount);

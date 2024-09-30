@@ -11,15 +11,29 @@ public class LevelSelectUI : MonoBehaviour
     public int currentLevel;
     public Button lvButton;
     public Transform buttonParent;
-    public ScrollRect scrollRect;
-    //public Button currentLvButton;
+    public GameObject Buttons;
     [SerializeField] private string loadToScene = "Level";
+    public Scrollbar scrollbar;
+    public RectTransform scrollView;
     // Start is called before the first frame update
     void Start()
     {
         maxLevel = 100;
-        currentLevel = PlayerPrefs.GetInt("nowLevel", 11);
+        currentLevel = PlayerPrefs.GetInt("nowLevel", 1);
         InstantiateButton();
+
+        // 정수값 구하기
+        float contentsHeight = 110 + (int)((Buttons.transform.childCount - 1) / 5) * (110+5);
+        float scrollHeight = contentsHeight - scrollView.rect.height;
+        if (scrollHeight > 0)
+        {
+            float levelHeight = (int)(currentLevel / 5) * (110 + 5);
+            scrollbar.value = 1 - levelHeight / scrollHeight;
+            if(scrollbar.value < 0f)
+            {
+                scrollbar.value = 0f;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -40,17 +54,8 @@ public class LevelSelectUI : MonoBehaviour
             {
                 btnGo.interactable = false;
             }
-            if(currentLevel == level)
-            {
-                Debug.Log("TEST = " + currentLevel + ", " + level);
-                //currentLvButton = btnGo;
-            }
             btnGo.onClick.AddListener(() => OnButtonClicked(level));
         }
-
-        // TODO 스크롤 하는법
-        //float targetPos = (currentLvButton.transform.localPosition.y / scrollRect.content.rect.height);
-        //scrollRect.normalizedPosition = new Vector2(0, 1 - targetPos);
     }
 
     // 버튼 클릭 시 호출되는 메서드
@@ -60,3 +65,9 @@ public class LevelSelectUI : MonoBehaviour
         fader.FadeTo(loadToScene+lv.ToString());
     }
 }
+
+/*
+ 게임데이터 SAVE/LOAD
+ - 로컬(디바이스) : 파일
+ - 서버 : 데이터베이스
+ */

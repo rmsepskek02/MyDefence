@@ -28,7 +28,7 @@ namespace MyDefence
 
         public void Menu()
         {
-            Debug.Log("Goto Menu");
+            //Debug.Log("Goto Menu");
             fader.FadeTo(loadToScene);
         }
     }

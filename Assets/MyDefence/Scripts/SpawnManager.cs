@@ -33,6 +33,9 @@ namespace MyDefence
 
         //현재 맵상에서 살아있는 적의 수
         public static int enmeyAlive = 0;
+
+        //
+        public GameManager gameManager;
         #endregion
 
 
@@ -103,7 +106,7 @@ namespace MyDefence
             //마지막 웨이브 체크해서 스폰기능 비활성화
             if (waveCount >= waves.Length)
             {
-                Debug.Log("Level Clear");
+                gameManager.LevelClear();
                 this.enabled = false;
             }
         }

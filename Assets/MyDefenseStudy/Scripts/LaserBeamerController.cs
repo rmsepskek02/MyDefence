@@ -35,7 +35,7 @@ public class LaserBeamerController : TurretController
             {
                 lineRenderer.enabled = false;
                 laserLight.enabled = false;
-                laserEffect.Pause();
+                laserEffect.Stop();
             }
             return;
         }

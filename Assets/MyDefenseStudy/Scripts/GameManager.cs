@@ -17,6 +17,13 @@ public class GameManager : MonoBehaviour
     public Button MenuButton;
     public TextMeshProUGUI roundText;
     [SerializeField] private string loadToMenu = "MainMenuScene";
+    [SerializeField] private string loadToScene = "Level";
+    //[SerializeField] private int unlockLevel = 2;
+    //[SerializeField] private string keyName = "NowLevel";
+    //public Transform contents;
+    //private Button[] levelButtons;
+    //[SerializeField] private string loadScene = "Level2";
+
     #endregion
     private void OnEnable()
     {
@@ -28,8 +35,30 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         GameOverUI.gameObject.SetActive(false);
         nowLevel = int.Parse(SceneManager.GetActiveScene().name.Replace("Level", ""));
+
+        //levelButtons = new Button[contents.childCount];
+
+        //for (int i = 0; i < levelButtons.Length; i++)
+        //{
+        //    Transform child = contents.GetChild(i);
+        //    levelButtons[i] = child.GetComponent<Button>();
+        //    if (i < nowLevel)
+        //    {
+        //        levelButtons[i].interactable = true;
+        //    }
+        //}
     }
-    // Update is called once per frame
+
+    //public void LevelClear()
+    //{
+    //    int nowLevel = PlayerPrefs.GetInt(keyName, 1);
+    //    if(nowLevel < unlockLevel)
+    //    {
+    //        PlayerPrefs.SetInt(keyName , unlockLevel);
+    //    }
+    //    fader.FadeTo(loadScene);
+    //}
+
     void Update()
     {
         if (isGameOver)
@@ -68,6 +97,10 @@ public class GameManager : MonoBehaviour
         GameOverUI.gameObject.SetActive(false);
         fader.FadeTo(loadToMenu);
         Debug.Log("MENU");
+    }
+    public void OnClickContinue()
+    {
+        fader.FadeTo(loadToScene + (nowLevel + 1).ToString());
     }
 }
 
